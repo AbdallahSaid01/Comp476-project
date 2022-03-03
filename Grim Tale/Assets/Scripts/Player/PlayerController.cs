@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        camOffset = cam.transform.position - transform.position;
+        camOffset = new Vector3(0f, 11.11f, -4.18f);
     }
 
     private void Update()
