@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HeavyProjectile heavyProjectile;
     [SerializeField] private float lightProjectileSpeed;
     [SerializeField] private float heavyProjectileSpeed;
+    [SerializeField] private float heavyAttackTime = 0.5f;
 
     private PlayerInput input;
     private CharacterController controller;
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
     
     private Camera cam;
     private Vector3 camOffset;
+
+    private bool heavyAttackIsUsable = false;
+    private float timeRemaining;
 
     [HideInInspector] public static int playerHealth = 5;
     [HideInInspector] public static int playerMana = 5;
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         camOffset = new Vector3(0f, 11.11f, -4.18f);
+        timeRemaining = heavyAttackTime;
     }
 
     private void Update()
@@ -112,6 +117,12 @@ public class PlayerController : MonoBehaviour
 
     private void CastSpells()
     {
+        if (Input.GetMouseButton(1) == false)
+        {
+            timeRemaining = heavyAttackTime;
+            heavyAttackIsUsable = true;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 start = transform.position;
@@ -121,14 +132,26 @@ public class PlayerController : MonoBehaviour
 
             projectile.SetSpeed(lightProjectileSpeed);
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButton(1))
         {
-            Vector3 start = transform.position;
-            start += new Vector3(0, 1, 0);
+            if (heavyAttackIsUsable)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                }
+                else
+                {
+                    Vector3 start = transform.position;
+                    start += new Vector3(0, 1, 0);
 
-            HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
+                    HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
 
-            projectile.SetSpeed(heavyProjectileSpeed);
+                    projectile.SetSpeed(heavyProjectileSpeed);
+
+                    heavyAttackIsUsable = false;
+                }
+            }
         }
     }
 

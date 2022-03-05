@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HeavyProjectile : MonoBehaviour
 {
+    [SerializeField] private float timeToDeath = 2f;
+
+
     private float speed;
 
     // Start is called before the first frame update
@@ -16,6 +19,15 @@ public class HeavyProjectile : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward.normalized * speed * Time.deltaTime;
+
+        if (timeToDeath > 0)
+        {
+            timeToDeath -= Time.deltaTime;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SetSpeed(float speed)
