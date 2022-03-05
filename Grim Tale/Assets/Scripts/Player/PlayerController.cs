@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 4f;    
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private LightProjectile lightProjectile;
+    [SerializeField] private float lightProjectileSpeed;
     
     private PlayerInput input;
     private CharacterController controller;
@@ -35,10 +37,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        View();        
+        View();
         Move();
         Rotate();
         Animate();
+        LightSpell();
+
     }
 
     private void View()
@@ -101,6 +105,19 @@ public class PlayerController : MonoBehaviour
         else if (angle > -75f && angle <= -15f)
         {
             animator.SetInteger("Direction", 8);
+        }
+    }
+
+    private void LightSpell()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 start = transform.position;
+            start += new Vector3(0, 1, 0);
+
+            LightProjectile projectile = Instantiate(lightProjectile, start, transform.rotation);
+
+            projectile.SetSpeed(lightProjectileSpeed);
         }
     }
 

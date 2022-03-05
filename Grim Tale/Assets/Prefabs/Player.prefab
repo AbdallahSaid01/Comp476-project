@@ -1984,6 +1984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  lightProjectile: {fileID: 4156387678617630364, guid: 84d2af489bbff4f5397186bd929e1a4e, type: 3}
+  lightProjectileSpeed: 10
 --- !u!1 &178660
 GameObject:
   m_ObjectHideFlags: 0
