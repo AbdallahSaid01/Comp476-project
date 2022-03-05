@@ -9,6 +9,8 @@ TagManager:
   - Hp
   - Gold
   - Obstacle
+  - Enemy
+  - Level
   layers:
   - Default
   - TransparentFX

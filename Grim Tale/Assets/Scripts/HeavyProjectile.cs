@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeavyProjectile : MonoBehaviour
 {
     [SerializeField] private float timeToDeath = 2f;
-
+    [SerializeField] private ParticleSystem particleSystem;
 
     private float speed;
 
@@ -33,5 +33,19 @@ public class HeavyProjectile : MonoBehaviour
     public void SetSpeed(float speed)
     {
         this.speed = speed;
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.transform.tag == "Enemy")
+        {
+            Vector3 positionVector = collider.transform.position;
+            Instantiate(particleSystem, positionVector, transform.rotation);
+            Destroy(gameObject);
+        }
+        else if (collider.transform.tag == "Level")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -117,12 +117,14 @@ public class PlayerController : MonoBehaviour
 
     private void CastSpells()
     {
+        // Reset the heavy spell
         if (Input.GetMouseButton(1) == false)
         {
             timeRemaining = heavyAttackTime;
             heavyAttackIsUsable = true;
         }
 
+        // Trigger light spell if left click is pressed once
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 start = transform.position;
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
 
             projectile.SetSpeed(lightProjectileSpeed);
         }
+        // Trigger heavy spell if right click is held down 
         else if (Input.GetMouseButton(1))
         {
             if (heavyAttackIsUsable)
