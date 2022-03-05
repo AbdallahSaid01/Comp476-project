@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 4f;
     [SerializeField] private LightProjectile lightProjectile;
+    [SerializeField] private HeavyProjectile heavyProjectile;
     [SerializeField] private float lightProjectileSpeed;
-    
+    [SerializeField] private float heavyProjectileSpeed;
+
     private PlayerInput input;
     private CharacterController controller;
     private Animator animator;
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Rotate();
         Animate();
-        LightSpell();
+        CastSpells();
 
     }
 
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void LightSpell()
+    private void CastSpells()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -118,6 +120,15 @@ public class PlayerController : MonoBehaviour
             LightProjectile projectile = Instantiate(lightProjectile, start, transform.rotation);
 
             projectile.SetSpeed(lightProjectileSpeed);
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 start = transform.position;
+            start += new Vector3(0, 1, 0);
+
+            HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
+
+            projectile.SetSpeed(heavyProjectileSpeed);
         }
     }
 
