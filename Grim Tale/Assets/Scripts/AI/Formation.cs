@@ -11,6 +11,8 @@ namespace AI
 
         public override void Enter()
         {
+            var random = Random.Range(0, 2);
+            enemy.Animator.SetInteger("Random", random);
             enemy.Animator.SetInteger("State", 1);
             
             base.Enter();

@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &495356
 Transform:
   m_ObjectHideFlags: 0
@@ -1175,7 +1175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8530c4fbedc79a4e8a3501fcbf4495c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
+  agentRadius: 0.3
+  maximumSpeed: 1.5
+  maximumAcceleration: 8
+  maximumAngularVelocity: 360
+  maximumAngularAcceleration: 540
+  arriveOrientation: 0.1
+  slowDownOrientation: 45
+  rotationTimeToTarget: 0.5
 --- !u!1 &147430
 GameObject:
   m_ObjectHideFlags: 0

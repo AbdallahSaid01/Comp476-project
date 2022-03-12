@@ -15,9 +15,18 @@ namespace AI.Pathfinding
         private GridGraphNode goalNode;
         private List<GridGraphNode> path;
 
-        [SerializeField] private float speed = 2.5f;
         [SerializeField] private float agentRadius = 0.3f;
+        [SerializeField] private float maximumSpeed = 2.5f;
+        [SerializeField] private float maximumAcceleration = 4f;
+        [SerializeField] private float maximumAngularVelocity = 180f;
+        [SerializeField] private float maximumAngularAcceleration = 360f;
+        [SerializeField] private float arriveOrientation = 0.1f;
+        [SerializeField] private float slowDownOrientation = 45f;
+        [SerializeField] private float rotationTimeToTarget = 0.5f;
 
+        private float _angularVelocity;
+        private Vector3 _velocity;
+        
         private void Awake()
         {
             graph = FindObjectOfType<GridGraph>();
@@ -32,11 +41,8 @@ namespace AI.Pathfinding
             var target = targetNode.transform.position;
             var adjustedTarget = new Vector3(target.x, transform.position.y, target.z);
 
-            // TODO Blend with steering behaviours
-            var direction = (adjustedTarget - transform.position).normalized;
-            var velocity = direction * speed;
-
-            transform.position += velocity * Time.deltaTime;
+            Seek(adjustedTarget);
+            LookWhereYouAreGoing();
         }
 
         public void SetDestination(Vector3 position)
@@ -296,6 +302,52 @@ namespace AI.Pathfinding
             }
 
             return target;
+        }
+        
+        // Steering seek behaviour
+        private void Seek(Vector3 target)
+        {
+            var position = transform.position;
+            var a = maximumAcceleration * (target - position).normalized;
+            var v = _velocity + a * Time.deltaTime;
+
+            if (v.magnitude > maximumSpeed)
+            {
+                v = v.normalized * maximumSpeed;
+            }
+
+            _velocity = v;
+        
+            var nextPosition = position + _velocity * Time.deltaTime;
+            transform.position = nextPosition;
+        }
+        
+        // Agent rotation
+        private void LookWhereYouAreGoing()
+        {
+            if (_velocity == Vector3.zero) return;
+        
+            var targetOrientation = Vector3.SignedAngle(transform.forward, _velocity, Vector3.up);
+
+            if (Mathf.Abs(targetOrientation - arriveOrientation) < arriveOrientation) return;
+        
+            var sign = targetOrientation < 0 ? -1 : 1;
+            var goalAngularVelocity = sign * maximumAngularVelocity * (targetOrientation / slowDownOrientation);
+            var angularAcceleration = (goalAngularVelocity - _angularVelocity) / rotationTimeToTarget;
+        
+            if (angularAcceleration > maximumAngularAcceleration)
+            {
+                angularAcceleration = maximumAngularAcceleration;
+            }
+
+            _angularVelocity += angularAcceleration * Time.deltaTime;
+
+            if (_angularVelocity > maximumAngularVelocity)
+            {
+                _angularVelocity = maximumAngularVelocity;
+            }
+        
+            transform.RotateAround(transform.position, Vector3.up, sign * _angularVelocity * Time.deltaTime);
         }
     }
 }
