@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private Vector3 camOffset;
 
+    [HideInInspector] public static int playerHealth = 5;
+    [HideInInspector] public static int playerMana = 5;
+    [HideInInspector] public static int playerGold = 0;
+
     private void Awake()
     {
         input = new PlayerInput();
