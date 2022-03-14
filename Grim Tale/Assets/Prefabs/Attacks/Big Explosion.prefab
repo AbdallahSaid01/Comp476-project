@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4931670425899275656}
   - component: {fileID: 7455863774086892437}
   - component: {fileID: 8654984750241522207}
+  - component: {fileID: 8768300168645334389}
   m_Layer: 0
   m_Name: Big Explosion
   m_TagString: Untagged
@@ -4775,3 +4776,15 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &8768300168645334389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596517014589712996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f765402b5d3641e296a025cdace6f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

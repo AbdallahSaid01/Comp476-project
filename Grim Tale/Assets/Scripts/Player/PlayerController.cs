@@ -21,12 +21,15 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private Vector3 camOffset;
 
-    private bool heavyAttackIsUsable = false;
+    private bool heavyAttackIsUsable = true;
     private float timeRemaining;
 
     [HideInInspector] public static int playerHealth = 5;
     [HideInInspector] public static int playerMana = 5;
     [HideInInspector] public static int playerGold = 0;
+
+    private float lightSpell;
+    private float heavySpell;
 
     private void Awake()
     {
@@ -48,8 +51,6 @@ public class PlayerController : MonoBehaviour
         Move();
         Rotate();
         Animate();
-        CastSpells();
-
     }
 
     private void View()
@@ -115,47 +116,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CastSpells()
+    private void LightSpell()
     {
-        // Reset the heavy spell
-        if (Input.GetMouseButton(1) == false)
-        {
-            timeRemaining = heavyAttackTime;
-            heavyAttackIsUsable = true;
-        }
+        Vector3 start = transform.position;
+        start += new Vector3(0, 1, 0);
+        LightProjectile projectile = Instantiate(lightProjectile, start, transform.rotation);
+        projectile.SetSpeed(lightProjectileSpeed);
+    }
 
-        // Trigger light spell if left click is pressed once
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 start = transform.position;
-            start += new Vector3(0, 1, 0);
-
-            LightProjectile projectile = Instantiate(lightProjectile, start, transform.rotation);
-
-            projectile.SetSpeed(lightProjectileSpeed);
-        }
-        // Trigger heavy spell if right click is held down 
-        else if (Input.GetMouseButton(1))
-        {
-            if (heavyAttackIsUsable)
-            {
-                if (timeRemaining > 0)
-                {
-                    timeRemaining -= Time.deltaTime;
-                }
-                else
-                {
-                    Vector3 start = transform.position;
-                    start += new Vector3(0, 1, 0);
-
-                    HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
-
-                    projectile.SetSpeed(heavyProjectileSpeed);
-
-                    heavyAttackIsUsable = false;
-                }
-            }
-        }
+    private void HeavySpell()
+    {
+        Vector3 start = transform.position;
+        start += new Vector3(0, 1, 0);
+        HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
+        projectile.SetSpeed(heavyProjectileSpeed);
     }
 
     #region Input
@@ -165,6 +139,16 @@ public class PlayerController : MonoBehaviour
         input.Controls.Enable();
         input.Controls.Move.performed += ReadMoveInput;
         input.Controls.Move.canceled += ReadMoveInput;
+        input.Controls.SmallSpell.performed += ReadLightSpellInput;
+        input.Controls.SmallSpell.canceled += ReadLightSpellInput;
+        input.Controls.BigSpell.performed += ReadHeavySpellInput;
+        input.Controls.BigSpell.canceled += ReadHeavySpellInput;
+
+        if (heavySpell == 0)
+        {
+            timeRemaining = heavyAttackTime;
+            heavyAttackIsUsable = true;
+        }
     }
 
     private void OnDisable()
@@ -176,6 +160,26 @@ public class PlayerController : MonoBehaviour
     {
         var vector = context.action.ReadValue<Vector2>();
         velocity = new Vector3(vector.x, 0f, vector.y);
+    }
+
+    private void ReadLightSpellInput(InputAction.CallbackContext context)
+    {   
+        lightSpell = context.action.ReadValue<float>();
+
+        if (lightSpell == 1)
+        {
+            LightSpell();
+        }
+    }
+
+    private void ReadHeavySpellInput(InputAction.CallbackContext context)
+    {
+        heavySpell = context.action.ReadValue<float>();
+
+        if (heavySpell == 1)
+        {
+            HeavySpell();
+        }
     }
 
     #endregion
