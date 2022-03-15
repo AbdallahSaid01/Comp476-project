@@ -1,9 +1,11 @@
 using UnityEngine;
 
-namespace AI
+namespace AI.States
 {
     public class Formation : State
     {
+        private FormationPoint formationPoint;
+
         public Formation(Enemy enemy) : base(enemy)
         {
             stateName = StateName.Formation;
@@ -11,6 +13,8 @@ namespace AI
 
         public override void Enter()
         {
+            formationPoint = FormationsManager.Instance.GetFormationPoint(enemy.Type);
+            
             var random = Random.Range(0, 2);
             enemy.Animator.SetInteger("Random", random);
             enemy.Animator.SetInteger("State", 1);
@@ -21,11 +25,13 @@ namespace AI
         public override void Update()
         {
             var distanceToPlayer = Vector3.Distance(enemy.Player.transform.position, enemy.transform.position);
-            if (distanceToPlayer <= enemy.ChaseDistance)
+            if (distanceToPlayer <= enemy.ChaseDistance || !formationPoint.Ready)
             {
                 nextState = new Chase(enemy);
                 stage = StateEvent.Exit;
             }
+                        
+            enemy.Agent.SetDestination(formationPoint.transform.position);
         }
     }
 }

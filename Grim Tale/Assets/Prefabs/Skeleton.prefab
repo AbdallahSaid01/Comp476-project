@@ -1163,6 +1163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 10
+  type: 0
+  upgradeType: 1
 --- !u!114 &9147483882447340819
 MonoBehaviour:
   m_ObjectHideFlags: 0

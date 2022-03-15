@@ -1,9 +1,11 @@
 using UnityEngine;
 
-namespace AI
+namespace AI.States
 {
     public class Idle : State
     {
+        private FormationPoint formationPoint;
+
         public Idle(Enemy enemy) : base(enemy)
         {
             stateName = StateName.Idle;
@@ -11,6 +13,7 @@ namespace AI
 
         public override void Enter()
         {
+            formationPoint = FormationsManager.Instance.GetFormationPoint(enemy.Type);
             enemy.Animator.SetInteger("State", 0);
             
             base.Enter();
@@ -19,7 +22,7 @@ namespace AI
         public override void Update()
         {
             var distanceToPlayer = Vector3.Distance(enemy.Player.transform.position, enemy.transform.position);
-            if (distanceToPlayer > enemy.ChaseDistance)
+            if (distanceToPlayer > enemy.ChaseDistance && formationPoint.Ready)
             {
                 nextState = new Formation(enemy);
                 stage = StateEvent.Exit;
