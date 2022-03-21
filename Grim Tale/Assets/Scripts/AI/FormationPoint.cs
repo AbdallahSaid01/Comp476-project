@@ -8,6 +8,7 @@ namespace AI
         [SerializeField] private EnemyType enemyType;
         [SerializeField] private int formationCount = 4;
         [SerializeField] private float formationRadius = 2f;
+        [SerializeField] private Enemy upgradePrefab;
 
         private bool ready;
         
@@ -27,15 +28,15 @@ namespace AI
                 {
                     Destroy(closeEnemies[i].gameObject);
                 }
-                
-                Debug.Log("Formation completed!");
+
+                Instantiate(upgradePrefab, transform.position, Quaternion.identity, FormationsManager.Instance.EnemiesParent);
             }
             
             transform.position = formationCenter;
         }
 
         // Properties
-
+        
         public bool Ready
         {
             get => ready;

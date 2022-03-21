@@ -8,6 +8,7 @@ TagManager:
   - Mana
   - Hp
   - Gold
+  - Obstacle
   layers:
   - Default
   - TransparentFX

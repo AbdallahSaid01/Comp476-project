@@ -8,7 +8,7 @@ namespace AI.States
 
         public Idle(Enemy enemy) : base(enemy)
         {
-            stateName = StateName.Idle;
+            name = StateName.Idle;
         }
 
         public override void Enter()
@@ -22,7 +22,7 @@ namespace AI.States
         public override void Update()
         {
             var distanceToPlayer = Vector3.Distance(enemy.Player.transform.position, enemy.transform.position);
-            if (distanceToPlayer > enemy.ChaseDistance && formationPoint.Ready)
+            if (distanceToPlayer > enemy.ChaseDistance && formationPoint.Ready && enemy.Type != enemy.UpgradeType)
             {
                 nextState = new Formation(enemy);
                 stage = StateEvent.Exit;

@@ -1,16 +1,13 @@
-using System.Linq;
-using UnityEngine;
-
 namespace AI
 {
     public class State
     {
-        public StateName stateName;
-
+        public StateName name;
+        
         protected StateEvent stage;
         protected State nextState;
         protected Enemy enemy;
-
+        
         public State(Enemy enemy)
         {
             stage = StateEvent.Enter;
@@ -36,6 +33,6 @@ namespace AI
         }
     }
 
-    public enum StateName { Idle, Chase, Formation }
+    public enum StateName { Idle, Chase, Formation, Charge }
     public enum StateEvent { Enter, Update, Exit }
 }

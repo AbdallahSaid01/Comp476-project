@@ -9,10 +9,12 @@ namespace AI
         [SerializeField] private float chaseDistance = 20f;
         [SerializeField] private EnemyType type;
         [SerializeField] private EnemyType upgradeType;
-        
-        private State state;
-        private Animator animator;
-        private PathfindingAgent agent;
+
+        protected PathfindingAgent agent;
+        protected State state;
+        protected Animator animator;
+        protected bool stateBlocked;
+
         private PlayerController player;
         
         private void Awake()
@@ -27,9 +29,11 @@ namespace AI
             state = new Idle(this);
         }
         
-        private void Update()
+        protected virtual void Update()
         {
-            state = state?.Process();
+            if(!stateBlocked)
+                state = state?.Process();
+            
             Debug.Log(gameObject + ": " + state?.ToString().ToUpper());
         }
 
@@ -39,7 +43,13 @@ namespace AI
         public float ChaseDistance => chaseDistance;
         public EnemyType Type => type;
         public EnemyType UpgradeType => upgradeType;
+
+        public bool StateBlocked
+        {
+            get => stateBlocked;
+            set => stateBlocked = value;
+        }
     }
 }
 
-public enum EnemyType { Skeleton, Charger }
+public enum EnemyType { Skeleton, MutantCharger }

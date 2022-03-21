@@ -26,26 +26,68 @@ namespace AI.Pathfinding
 
         private float _angularVelocity;
         private Vector3 _velocity;
+        private Vector3 _velocityForRotation;
+        private bool _rotateFirst;
+        private bool _isStopped;
+        private bool _arrived;
+
+        public List<GridGraphNode> Path
+        {
+            set => path = value;
+        }
+        
+        public float MaximumSpeed
+        {
+            set => maximumSpeed = value;
+        }
+
+        public bool IsStopped
+        {
+            set => _isStopped = value;
+        }
+        
+        public bool Arrived => _arrived;
         
         private void Awake()
         {
             graph = FindObjectOfType<GridGraph>();
-            Debug.Log(graph.Nodes.Count);
         }
 
         private void Update()
         {
-            if (path == null || path.Count == 0) return;
+            if (path == null || path.Count == 0)
+            {
+                _arrived = false;
+                return;
+            }
             
             var targetNode = PathFollowing();
             var target = targetNode.transform.position;
-            var adjustedTarget = new Vector3(target.x, transform.position.y, target.z);
+            var position = transform.position;
+            var adjustedTarget = new Vector3(target.x, position.y, target.z);
 
-            Seek(adjustedTarget);
-            LookWhereYouAreGoing();
+            _arrived = startNode != goalNode && targetNode == goalNode && Vector3.Distance(adjustedTarget, position) < 0.1f;
+
+            if (_rotateFirst)
+            {
+                _velocityForRotation = adjustedTarget - transform.position;
+                if (Vector3.Angle(_velocityForRotation, transform.forward) < 1f && !_isStopped)
+                {
+                    Seek(adjustedTarget);
+                }
+
+                LookWhereYouAreGoing();
+            }
+            else
+            {
+                if(!_isStopped)
+                    Seek(adjustedTarget);
+                
+                LookWhereYouAreGoing();
+            }
         }
 
-        public void SetDestination(Vector3 position)
+        public void SetDestination(Vector3 position, bool rotateFirst = false)
         {
             if (graph == null || graph.Nodes == null || graph.Nodes.Count == 0) return;
             
@@ -55,6 +97,7 @@ namespace AI.Pathfinding
             ClearPoints();
             
             path = FindPath(startNode, goalNode, ManhattanHeuristic);
+            _rotateFirst = rotateFirst;
         }
     
         // Actual path finding
@@ -317,6 +360,7 @@ namespace AI.Pathfinding
             }
 
             _velocity = v;
+            _velocityForRotation = _velocity;
         
             var nextPosition = position + _velocity * Time.deltaTime;
             transform.position = nextPosition;
@@ -325,9 +369,9 @@ namespace AI.Pathfinding
         // Agent rotation
         private void LookWhereYouAreGoing()
         {
-            if (_velocity == Vector3.zero) return;
+            if (_velocityForRotation == Vector3.zero) return;
         
-            var targetOrientation = Vector3.SignedAngle(transform.forward, _velocity, Vector3.up);
+            var targetOrientation = Vector3.SignedAngle(transform.forward, _velocityForRotation, Vector3.up);
 
             if (Mathf.Abs(targetOrientation - arriveOrientation) < arriveOrientation) return;
         

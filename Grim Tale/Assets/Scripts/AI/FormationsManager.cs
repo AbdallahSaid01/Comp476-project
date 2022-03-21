@@ -7,6 +7,7 @@ namespace AI
         public static FormationsManager Instance;
 
         [SerializeField] private FormationPoint skeletonFormationPoint;
+        [SerializeField] private Transform enemiesParent;
 
         private void Awake()
         {
@@ -28,6 +29,11 @@ namespace AI
         public FormationPoint SkeletonFormationPoint
         {
             get => skeletonFormationPoint;
+        }
+
+        public Transform EnemiesParent
+        {
+            get => enemiesParent;
         }
     }
 }

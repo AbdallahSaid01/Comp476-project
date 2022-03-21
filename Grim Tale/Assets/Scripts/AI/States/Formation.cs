@@ -8,7 +8,7 @@ namespace AI.States
 
         public Formation(Enemy enemy) : base(enemy)
         {
-            stateName = StateName.Formation;
+            name = StateName.Formation;
         }
 
         public override void Enter()
