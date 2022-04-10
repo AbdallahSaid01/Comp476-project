@@ -7,6 +7,7 @@ namespace AI
         public static FormationsManager Instance;
 
         [SerializeField] private FormationPoint skeletonFormationPoint;
+        [SerializeField] private FormationPoint goblinShamanFormationPoint;
         [SerializeField] private Transform enemiesParent;
 
         private void Awake()
@@ -20,17 +21,13 @@ namespace AI
             return type switch
             {
                 EnemyType.Skeleton => skeletonFormationPoint,
+                EnemyType.GoblinShaman => goblinShamanFormationPoint, 
                 _ => null
             };
         }
 
         // Properties
         
-        public FormationPoint SkeletonFormationPoint
-        {
-            get => skeletonFormationPoint;
-        }
-
         public Transform EnemiesParent
         {
             get => enemiesParent;

@@ -4,8 +4,6 @@ namespace AI.States
 {
     public class Chase : State
     {
-        private FormationPoint formationPoint;
-        
         public Chase(Enemy enemy) : base(enemy)
         {
             name = StateName.Chase;
@@ -13,8 +11,6 @@ namespace AI.States
         
         public override void Enter()
         {
-            formationPoint = FormationsManager.Instance.GetFormationPoint(enemy.Type);
-            
             enemy.Agent.MaximumSpeed = GetTypeSpeed();
             
             var random = GetAnimationVariations();
@@ -30,8 +26,9 @@ namespace AI.States
             var enemyPosition = enemy.transform.position;
             var distanceToPlayer = Vector3.Distance(playerPosition, enemyPosition);
             var directionToPlayer = playerPosition - enemyPosition;
-
-            if (distanceToPlayer > enemy.ChaseDistance && formationPoint.Ready && enemy.Type != enemy.UpgradeType)
+            
+            // Formation
+            if (distanceToPlayer > enemy.ChaseDistance && formationPoint is {Ready: true} && enemy.Type != enemy.UpgradeType)
             {
                 nextState = new Formation(enemy);
                 stage = StateEvent.Exit;
@@ -39,6 +36,16 @@ namespace AI.States
                 return;
             }
             
+            // Attack
+            if (distanceToPlayer < enemy.AttackDistance)
+            {
+                nextState = new Attack(enemy);
+                stage = StateEvent.Exit;
+
+                return;
+            }
+            
+            // Charge
             if (enemy.Type == EnemyType.MutantCharger && !Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
             {
                 nextState = new Charge(enemy);
@@ -47,6 +54,7 @@ namespace AI.States
                 return;
             }
             
+            // Chase
             enemy.Agent.SetDestination(enemy.Player.transform.position);
         }
 

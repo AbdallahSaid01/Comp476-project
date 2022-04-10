@@ -7,14 +7,19 @@ namespace AI
         protected StateEvent stage;
         protected State nextState;
         protected Enemy enemy;
-        
+        protected FormationPoint formationPoint;
+
         public State(Enemy enemy)
         {
             stage = StateEvent.Enter;
             this.enemy = enemy;
         }
 
-        public virtual void Enter() { stage = StateEvent.Update; }
+        public virtual void Enter()
+        {
+            formationPoint = FormationsManager.Instance.GetFormationPoint(enemy.Type);
+            stage = StateEvent.Update;
+        }
         public virtual void Update() { stage = StateEvent.Update; }
         public virtual void Exit() { stage = StateEvent.Exit; }
 
@@ -33,6 +38,6 @@ namespace AI
         }
     }
 
-    public enum StateName { Idle, Chase, Formation, Charge }
+    public enum StateName { Idle, Chase, Formation, Attack, Charge }
     public enum StateEvent { Enter, Update, Exit }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GoldScript : MonoBehaviour
 {
-
     private int value;
 
     void Start()
@@ -12,25 +11,18 @@ public class GoldScript : MonoBehaviour
         value = Random.Range(1, 10);
     }
 
-    public void setValue(int val)
+    public void SetValue(int val)
     {
         value = val;
     }
 
-    private void increment()
-    {
-        PlayerController.playerGold += value;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController playerController = other.GetComponent<PlayerController>();
+        var player = other.GetComponent<PlayerController>();
 
-        if(playerController != null)
-        {
-            increment();
-            Destroy(gameObject);
-        }
+        if (!player) return;
+        
+        player.Loot(value);
+        Destroy(gameObject);
     }
-
 }

@@ -11,24 +11,18 @@ public class ManaScript : MonoBehaviour
         value = Random.Range(1, 10);
     }
 
-    public void setValue(int val)
+    public void SetValue(int val)
     {
         value = val;
     }
 
-    private void increment()
-    {
-        PlayerController.playerMana += value;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController playerController = other.GetComponent<PlayerController>();
+        var player = other.GetComponent<PlayerController>();
 
-        if (playerController != null)
-        {
-            increment();
-            Destroy(gameObject.transform.parent.parent.gameObject);
-        }
+        if (!player) return;
+        
+        player.RegenMana(value);
+        Destroy(gameObject.transform.parent.parent.gameObject);
     }
 }

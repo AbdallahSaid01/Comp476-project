@@ -366,8 +366,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.18105444, y: 1.6481298, z: 0.4653066}
-  m_Center: {x: -0.0060920715, y: 0.8190767, z: 0.28929362}
+  m_Size: {x: 0.43421778, y: 1.6481298, z: 0.4653066}
+  m_Center: {x: 0.0033198993, y: 0.8190767, z: 0.28929362}
 --- !u!1 &7252025465645032965
 GameObject:
   m_ObjectHideFlags: 0

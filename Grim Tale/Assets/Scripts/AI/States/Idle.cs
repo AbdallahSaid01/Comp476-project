@@ -4,8 +4,6 @@ namespace AI.States
 {
     public class Idle : State
     {
-        private FormationPoint formationPoint;
-
         public Idle(Enemy enemy) : base(enemy)
         {
             name = StateName.Idle;
@@ -13,7 +11,6 @@ namespace AI.States
 
         public override void Enter()
         {
-            formationPoint = FormationsManager.Instance.GetFormationPoint(enemy.Type);
             enemy.Animator.SetInteger("State", 0);
             
             base.Enter();
@@ -22,14 +19,26 @@ namespace AI.States
         public override void Update()
         {
             var distanceToPlayer = Vector3.Distance(enemy.Player.transform.position, enemy.transform.position);
-            if (distanceToPlayer > enemy.ChaseDistance && formationPoint.Ready && enemy.Type != enemy.UpgradeType)
+            
+            // Formation
+            if (distanceToPlayer > enemy.ChaseDistance && formationPoint is {Ready: true} && enemy.Type != enemy.UpgradeType)
             {
                 nextState = new Formation(enemy);
                 stage = StateEvent.Exit;
 
                 return;
             }
+            
+            // Attack
+            if (distanceToPlayer < enemy.AttackDistance)
+            {
+                nextState = new Attack(enemy);
+                stage = StateEvent.Exit;
 
+                return;
+            }
+            
+            // Chase
             nextState = new Chase(enemy);
             stage = StateEvent.Exit;
         }

@@ -22,7 +22,6 @@ namespace AI.States
             var adjustedPlayerPosition = new Vector3(playerPosition.x, enemyPosition.y, playerPosition.z);
             chargeDirection = adjustedPlayerPosition - enemyPosition;
             
-            Debug.DrawLine(enemyPosition, enemyPosition + chargeDirection * 50f, Color.black, 50f);
             if (!Physics.Raycast(enemyPosition, chargeDirection, out var hitInfo, float.PositiveInfinity, LayerMask.GetMask("Obstacle"))) return;
             
             enemy.Agent.SetDestination(hitInfo.point);
@@ -30,28 +29,6 @@ namespace AI.States
             base.Enter();
         }
 
-        public Vector3 ChargeDirection
-        {
-            get => chargeDirection;
-        }
-        
-        // private IEnumerator PrepareCharge()
-        // {
-        //     do
-        //     {
-        //         var lookRotation = Quaternion.LookRotation(chargeDirection, Vector3.up);
-        //         var lerpRotation = Quaternion.Lerp(enemy.transform.rotation, lookRotation, 50f * Time.deltaTime);
-        //         enemy.transform.rotation = lerpRotation;
-        //
-        //         yield return null;
-        //     } 
-        //     while (Vector3.Angle(chargeDirection, enemy.transform.forward) > 10f);
-        //     
-        //     Physics.Raycast(enemy.transform.position, chargeDirection, out var hitInfo, float.PositiveInfinity, LayerMask.GetMask("Obstacle"));
-        //     enemy.Agent.SetDestination(hitInfo.point);
-        //     
-        //     enemy.Animator.SetInteger("State", 2);
-        //     enemy.Agent.MaximumSpeed = 6f;
-        // }
+        public Vector3 ChargeDirection => chargeDirection;
     }
 }

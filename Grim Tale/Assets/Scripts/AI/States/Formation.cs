@@ -4,8 +4,6 @@ namespace AI.States
 {
     public class Formation : State
     {
-        private FormationPoint formationPoint;
-
         public Formation(Enemy enemy) : base(enemy)
         {
             name = StateName.Formation;
@@ -13,8 +11,6 @@ namespace AI.States
 
         public override void Enter()
         {
-            formationPoint = FormationsManager.Instance.GetFormationPoint(enemy.Type);
-            
             var random = Random.Range(0, 2);
             enemy.Animator.SetInteger("Random", random);
             enemy.Animator.SetInteger("State", 1);
