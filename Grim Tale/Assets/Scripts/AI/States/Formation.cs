@@ -11,6 +11,8 @@ namespace AI.States
 
         public override void Enter()
         {
+            enemy.Agent.IsStopped = false;
+            
             var random = Random.Range(0, 2);
             enemy.Animator.SetInteger("Random", random);
             enemy.Animator.SetInteger("State", 1);

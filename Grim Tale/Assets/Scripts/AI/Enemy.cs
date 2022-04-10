@@ -10,6 +10,7 @@ namespace AI
         [SerializeField] private float attackDistance = 2f;
         [SerializeField] private int damage = 1;
         [SerializeField] private float damageCooldown = 1f;
+        [SerializeField] private bool hasAnimationAttack;
         [SerializeField] private EnemyType type;
         [SerializeField] private EnemyType upgradeType;
 
@@ -54,7 +55,7 @@ namespace AI
         public float AttackDistance => attackDistance;
         public float ChaseDistance => chaseDistance;
         public int Damage => damage;
-        public float DamageCooldown => damageCooldown;
+        public bool HasAnimationAttack => hasAnimationAttack;
         public EnemyType Type => type;
         public EnemyType UpgradeType => upgradeType;
         public bool CanUpgrade => state.name.Equals(StateName.Formation);

@@ -2539,6 +2539,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 20
+  attackDistance: 10
+  damage: 1
+  damageCooldown: 1
+  hasAnimationAttack: 1
   type: 2
   upgradeType: 3
 --- !u!114 &5220357027604572743

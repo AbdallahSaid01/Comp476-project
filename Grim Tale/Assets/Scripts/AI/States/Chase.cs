@@ -11,6 +11,7 @@ namespace AI.States
         
         public override void Enter()
         {
+            enemy.Agent.IsStopped = false;
             enemy.Agent.MaximumSpeed = GetTypeSpeed();
             
             var random = GetAnimationVariations();
