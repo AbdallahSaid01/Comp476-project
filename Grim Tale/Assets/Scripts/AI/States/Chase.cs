@@ -67,6 +67,8 @@ namespace AI.States
                     return 1.5f;
                 case EnemyType.MutantCharger:
                     return 1.5f;
+                case EnemyType.GoblinShaman:
+                    return 4f;
                 default:
                     return 1.5f;
             }
@@ -80,6 +82,8 @@ namespace AI.States
                     return Random.Range(0, 2);
                 case EnemyType.MutantCharger:
                     return Random.Range(0, 2);
+                case EnemyType.GoblinShaman:
+                    return Random.Range(0, 1);
                 default:
                     return Random.Range(0, 1);
             }

@@ -19,22 +19,27 @@ namespace AI.States
 
                 return;
             }
-
+            
+            Debug.Log(enemy.CanAttack);
             if (!enemy.CanAttack) return;
 
             if (enemy.HasAnimationAttack)
             {
-                enemy.Agent.SetDestination(enemy.transform.position, true);
+                enemy.Agent.SetDestination(enemy.Player.transform.position);
                 enemy.Agent.IsStopped = true;
+                
+                // TODO Rotate towards player first
+                enemy.Animator.SetInteger("State", 0);
+                enemy.Animator.SetTrigger("Attack");
+                enemy.ResetAttackTimer();
             }
             else
             {
                 enemy.Agent.SetDestination(enemy.Player.transform.position);
                 enemy.Agent.IsStopped = false;
+                enemy.Player.Damage(enemy.Damage);
+                enemy.ResetAttackTimer();
             }
-            
-            enemy.Player.Damage(enemy.Damage);
-            enemy.ResetAttackTimer();
         }
     }
 }

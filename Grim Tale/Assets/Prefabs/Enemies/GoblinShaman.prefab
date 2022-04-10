@@ -2517,7 +2517,7 @@ Animator:
   m_GameObject: {fileID: 194332}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b69174d668ba02d44b14a084b217670a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 40efb886342f13c488d17de5a13c4ed0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 619fd2dd89e7a384988d194d7451c43f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2541,7 +2541,7 @@ MonoBehaviour:
   chaseDistance: 20
   attackDistance: 10
   damage: 1
-  damageCooldown: 1
+  damageCooldown: 2
   hasAnimationAttack: 1
   type: 2
   upgradeType: 3
@@ -2559,7 +2559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   agentRadius: 0.3
-  maximumSpeed: 2.5
+  maximumSpeed: 4
   maximumAcceleration: 4
   maximumAngularVelocity: 180
   maximumAngularAcceleration: 360
