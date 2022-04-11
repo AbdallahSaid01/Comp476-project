@@ -31,6 +31,7 @@ namespace AI.Pathfinding
         private bool _rotateFirst;
         private bool _isStopped;
         private bool _arrived;
+        private bool _controlRotation = true;
 
         public List<GridGraphNode> Path
         {
@@ -94,8 +95,11 @@ namespace AI.Pathfinding
             {
                 if(!_isStopped)
                     Seek(adjustedTarget);
-                
-                LookWhereYouAreGoing();
+
+                if (_controlRotation)
+                {
+                    LookWhereYouAreGoing();
+                }
             }
         }
 

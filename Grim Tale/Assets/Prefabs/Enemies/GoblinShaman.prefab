@@ -458,7 +458,7 @@ Transform:
   m_Children:
   - {fileID: 443596}
   m_Father: {fileID: 476942}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &115734
 GameObject:
@@ -1072,6 +1072,7 @@ Transform:
   m_LocalPosition: {x: -27.114529, y: 0, z: -0.038136426}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7304378703401288497}
   - {fileID: 472920}
   - {fileID: 440086}
   - {fileID: 496440}
@@ -1808,7 +1809,7 @@ Transform:
   m_Children:
   - {fileID: 478786}
   m_Father: {fileID: 476942}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172792
 GameObject:
@@ -2439,7 +2440,7 @@ Transform:
   m_Children:
   - {fileID: 480778}
   m_Father: {fileID: 476942}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &188554
 GameObject:
@@ -2482,7 +2483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410742}
   - component: {fileID: 9585324}
-  - component: {fileID: 2584764378885807204}
+  - component: {fileID: 6580799380659201977}
   - component: {fileID: 5220357027604572743}
   m_Layer: 0
   m_Name: GoblinShaman
@@ -2526,7 +2527,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2584764378885807204
+--- !u!114 &6580799380659201977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2535,7 +2536,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 194332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d6984d0ba88c9428b6d00da52561c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 479502039a5ffcf4aa60e2ae9dbee233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 20
@@ -2545,6 +2546,8 @@ MonoBehaviour:
   hasAnimationAttack: 1
   type: 2
   upgradeType: 3
+  enemyProjectilePrefab: {fileID: 7455747758524728853, guid: 332d90fd2a1a07649b6f1004a034ab93, type: 3}
+  projectileSpawnPosition: {fileID: 7304378703401288497}
 --- !u!114 &5220357027604572743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2559,10 +2562,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   agentRadius: 0.3
-  maximumSpeed: 4
-  maximumAcceleration: 4
-  maximumAngularVelocity: 180
-  maximumAngularAcceleration: 360
+  maximumSpeed: 3.5
+  maximumAcceleration: 8
+  maximumAngularVelocity: 720
+  maximumAngularAcceleration: 720
   arriveOrientation: 0.1
   slowDownOrientation: 45
   rotationTimeToTarget: 0.5
@@ -2728,3 +2731,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6701187731007868849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7304378703401288497}
+  m_Layer: 0
+  m_Name: Projectile Spawn Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7304378703401288497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701187731007868849}
+  m_LocalRotation: {x: 0.000000091819764, y: -0.000000007450579, z: 0.000000059195752, w: -1}
+  m_LocalPosition: {x: -13.7, y: -9.2, z: 0.4}
+  m_LocalScale: {x: 99.99998, y: 99.99998, z: 99.99996}
+  m_Children: []
+  m_Father: {fileID: 476942}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

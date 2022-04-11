@@ -7,9 +7,10 @@ namespace AI
 {
     public class Enemy : MonoBehaviour
     {
+        [Header("Enemy")]
         [SerializeField] private float chaseDistance = 20f;
         [SerializeField] private float attackDistance = 2f;
-        [SerializeField] private int damage = 1;
+        [SerializeField] protected int damage = 1;
         [SerializeField] private float damageCooldown = 1f;
         [SerializeField] private bool hasAnimationAttack;
         [SerializeField] private EnemyType type;
@@ -19,8 +20,8 @@ namespace AI
         protected State state;
         protected Animator animator;
         protected bool stateBlocked;
-
-        private PlayerController player;
+        protected PlayerController player;
+        
         private float attackTimer;
         
         private void Awake()
@@ -41,6 +42,7 @@ namespace AI
                 state = state?.Process();
 
             attackTimer -= Time.deltaTime;
+        }
 
         // private void OnTriggerEnter(Collider other)
         // {
