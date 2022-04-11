@@ -341,7 +341,10 @@ namespace AI.Pathfinding
                 var position = transform.position;
                 var nextNodePosition = path[i].transform.position;
                 var nextNodeAdjustedPosition = new Vector3(nextNodePosition.x, position.y, nextNodePosition.z);
-                var clear = !Physics.SphereCast(position, agentRadius, nextNodeAdjustedPosition - position, out _, Vector3.Distance(position, nextNodeAdjustedPosition), LayerMask.GetMask("Obstacle"));
+                var direction = nextNodeAdjustedPosition - position;
+                var distance = Vector3.Distance(position, nextNodeAdjustedPosition);
+                var layerMask = LayerMask.GetMask("Obstacle");
+                var clear = !Physics.Raycast(position, direction, out _, distance, layerMask) && !Physics.SphereCast(position, agentRadius, direction, out _, distance, layerMask);
 
                 if (clear)
                 {
