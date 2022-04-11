@@ -65,6 +65,13 @@ namespace AI.States
             enemy.Agent.SetDestination(enemy.Player.transform.position);
         }
 
+        public override void Exit()
+        {
+            enemy.Agent.FormationVector = Vector3.zero;
+            
+            base.Exit();
+        }
+
         private float GetTypeSpeed()
         {
             switch (enemy.Type)

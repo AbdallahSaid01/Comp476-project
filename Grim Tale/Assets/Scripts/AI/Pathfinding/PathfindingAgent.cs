@@ -26,6 +26,7 @@ namespace AI.Pathfinding
 
         private float _angularVelocity;
         private Vector3 _velocity;
+        private Vector3 _formationVector;
         private Vector3 _velocityForRotation;
         private bool _rotateFirst;
         private bool _isStopped;
@@ -50,6 +51,12 @@ namespace AI.Pathfinding
         public bool ControlRotation
         {
             set => _controlRotation = value;
+        }
+
+        public Vector3 FormationVector
+        {
+            get => _formationVector;
+            set => _formationVector = value;
         }
         
         public bool Arrived => _arrived;
@@ -368,7 +375,7 @@ namespace AI.Pathfinding
                 v = v.normalized * maximumSpeed;
             }
 
-            _velocity = v;
+            _velocity = v + _formationVector;
             _velocityForRotation = _velocity;
         
             var nextPosition = position + _velocity * Time.deltaTime;

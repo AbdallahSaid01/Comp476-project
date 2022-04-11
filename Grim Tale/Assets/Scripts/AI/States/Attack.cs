@@ -15,7 +15,7 @@ namespace AI.States
             var enemyPosition = enemy.transform.position;
             var distanceToPlayer = Vector3.Distance(playerPosition, enemyPosition);
             var directionToPlayer = playerPosition - enemyPosition;
-
+            
             if (distanceToPlayer > enemy.AttackDistance || Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
             {
                 if (enemy.HasAnimationAttack)
@@ -24,7 +24,7 @@ namespace AI.States
                 }
                 nextState = new Chase(enemy);
                 stage = StateEvent.Exit;
-
+                
                 return;
             }
             
@@ -33,6 +33,7 @@ namespace AI.States
             if (enemy.HasAnimationAttack)
             {
                 enemy.Animator.SetInteger("State", 0);
+                enemy.Agent.SetDestination(enemy.transform.position);
                 enemy.Agent.IsStopped = true;
                 enemy.Agent.ControlRotation = false;
 

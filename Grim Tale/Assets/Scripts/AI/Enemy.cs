@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using AI.Pathfinding;
 using AI.States;
@@ -42,6 +43,22 @@ namespace AI
 
             attackTimer -= Time.deltaTime;
         }
+
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     var enemy = other.GetComponent<Enemy>();
+        //     if (!enemy) return;
+        //
+        //     agent.FormationVector += (transform.position - enemy.transform.position).normalized;
+        // }
+        //
+        // private void OnTriggerExit(Collider other)
+        // {
+        //     var enemy = other.GetComponent<Enemy>();
+        //     if (!enemy) return;
+        //
+        //     agent.FormationVector -= (transform.position - enemy.transform.position).normalized;
+        // }
 
         public virtual void Attack()
         {
