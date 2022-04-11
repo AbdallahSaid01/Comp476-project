@@ -21,16 +21,18 @@ public class PlayerController : MonoBehaviour
 
     private bool heavyAttackIsUsable = true;
     private float timeRemaining;
-
+    private float lightSpell;
+    private float heavySpell;
+    
     private int maxHealth = 5;
     private int health;
     private int maxMana = 5;
     private int mana;
     private int gold;
 
-    private float lightSpell;
-    private float heavySpell;
+    private bool isDead;
     
+    private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Direction = Animator.StringToHash("Direction");
 
     private void Awake()
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) return;
+        
         View();
         Move();
         Rotate();
@@ -60,11 +64,11 @@ public class PlayerController : MonoBehaviour
     public void Damage(int amount)
     {
         health = Mathf.Max(health - amount, 0);
+
+        if (isDead || !health.Equals(0)) return;
         
-        if (health.Equals(0))
-        {
-            // Die
-        }
+        isDead = true;
+        animator.SetTrigger(Die);
     }
 
     public void Loot(int amount)
@@ -147,17 +151,21 @@ public class PlayerController : MonoBehaviour
 
     private void LightSpell()
     {
-        Vector3 start = transform.position;
+        if (isDead) return;
+        
+        var start = transform.position;
         start += new Vector3(0, 1, 0);
-        LightProjectile projectile = Instantiate(lightProjectile, start, transform.rotation);
+        var projectile = Instantiate(lightProjectile, start, transform.rotation);
         projectile.SetSpeed(lightProjectileSpeed);
     }
 
     private void HeavySpell()
     {
-        Vector3 start = transform.position;
+        if (isDead) return;
+        
+        var start = transform.position;
         start += new Vector3(0, 1, 0);
-        HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
+        var projectile = Instantiate(heavyProjectile, start, transform.rotation);
         projectile.SetSpeed(heavyProjectileSpeed);
     }
     
