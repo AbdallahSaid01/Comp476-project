@@ -7,6 +7,12 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GamePaused = false;
     public GameObject pauseMenuUI;
+    private PlayerController pc;
+
+    private void Awake()
+    {
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,6 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        pc.input.Controls.Enable();
         Time.timeScale = 1f;
         GamePaused = false;
     }
@@ -35,6 +42,7 @@ public class PauseMenu : MonoBehaviour
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
+        pc.input.Controls.Disable();
         Time.timeScale = 0f;
         GamePaused = true;
     }
@@ -50,7 +58,6 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        Time.timeScale = 1f;
         GamePaused = false;
     }
 

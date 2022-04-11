@@ -11,8 +11,6 @@ namespace AI.States
 
         public override void Enter()
         {
-            enemy.Agent.ControlRotation = true;
-            enemy.Agent.IsStopped = true;
             enemy.Animator.SetInteger("State", 0);
             
             base.Enter();
@@ -20,10 +18,7 @@ namespace AI.States
 
         public override void Update()
         {
-            var playerPosition = enemy.Player.transform.position;
-            var enemyPosition = enemy.transform.position;
-            var distanceToPlayer = Vector3.Distance(playerPosition, enemyPosition);
-            var directionToPlayer = playerPosition - enemyPosition;
+            var distanceToPlayer = Vector3.Distance(enemy.Player.transform.position, enemy.transform.position);
             
             // Formation
             if (distanceToPlayer > enemy.ChaseDistance && formationPoint is {Ready: true} && enemy.Type != enemy.UpgradeType)
@@ -35,7 +30,7 @@ namespace AI.States
             }
             
             // Attack
-            if (distanceToPlayer < enemy.AttackDistance && !Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
+            if (distanceToPlayer < enemy.AttackDistance)
             {
                 nextState = new Attack(enemy);
                 stage = StateEvent.Exit;

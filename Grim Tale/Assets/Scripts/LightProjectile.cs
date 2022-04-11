@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LightProjectile : MonoBehaviour
@@ -7,7 +9,14 @@ public class LightProjectile : MonoBehaviour
 
     private float speed;
 
-    private void Update()
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         transform.position += transform.forward.normalized * speed * Time.deltaTime;
 
@@ -28,13 +37,13 @@ public class LightProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Enemy"))
+        if (collider.transform.tag == "Enemy")
         {
-            var positionVector = collider.transform.position;
+            Vector3 positionVector = collider.transform.position;
             Instantiate(particleSystem, positionVector, transform.rotation);
             Destroy(gameObject);
         }
-        else if (collider.gameObject.CompareTag("Level"))
+        else if (collider.transform.tag == "Level")
         {
             Destroy(gameObject);
         }

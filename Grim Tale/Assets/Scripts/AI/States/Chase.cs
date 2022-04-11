@@ -12,17 +12,11 @@ namespace AI.States
         public override void Enter()
         {
             enemy.Agent.IsStopped = false;
-            enemy.Agent.ControlRotation = true;
             enemy.Agent.MaximumSpeed = GetTypeSpeed();
             
             var random = GetAnimationVariations();
             enemy.Animator.SetInteger("Random", random);
             enemy.Animator.SetInteger("State", 1);
-
-            if (enemy.HasAnimationAttack)
-            {
-                enemy.Animator.ResetTrigger("InterruptAttack");
-            }
             
             base.Enter();
         }
@@ -44,7 +38,7 @@ namespace AI.States
             }
             
             // Attack
-            if (distanceToPlayer < enemy.AttackDistance && !Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
+            if (distanceToPlayer < enemy.AttackDistance)
             {
                 nextState = new Attack(enemy);
                 stage = StateEvent.Exit;

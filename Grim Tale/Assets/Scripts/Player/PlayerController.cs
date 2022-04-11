@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float heavyProjectileSpeed;
     [SerializeField] private float heavyAttackTime = 0.5f;
 
-    private PlayerInput input;
+    [HideInInspector] public PlayerInput input;
     private CharacterController controller;
     private Animator animator;
     private Vector3 velocity;
@@ -21,18 +21,16 @@ public class PlayerController : MonoBehaviour
 
     private bool heavyAttackIsUsable = true;
     private float timeRemaining;
-    private float lightSpell;
-    private float heavySpell;
-    
+
     private int maxHealth = 5;
     private int health;
     private int maxMana = 5;
     private int mana;
     private int gold;
 
-    private bool isDead;
+    private float lightSpell;
+    private float heavySpell;
     
-    private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Direction = Animator.StringToHash("Direction");
 
     private void Awake()
@@ -53,22 +51,26 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (isDead) return;
-        
         View();
         Move();
-        Rotate();
-        Animate();
+
+        if (Time.timeScale != 0)
+        {
+            Rotate();
+            Animate();
+        }
+        
     }
 
     public void Damage(int amount)
     {
         health = Mathf.Max(health - amount, 0);
-
-        if (isDead || !health.Equals(0)) return;
         
-        isDead = true;
-        animator.SetTrigger(Die);
+        Debug.Log(health);
+        if (health.Equals(0))
+        {
+            // Die
+        }
     }
 
     public void Loot(int amount)
@@ -151,21 +153,17 @@ public class PlayerController : MonoBehaviour
 
     private void LightSpell()
     {
-        if (isDead) return;
-        
-        var start = transform.position;
+        Vector3 start = transform.position;
         start += new Vector3(0, 1, 0);
-        var projectile = Instantiate(lightProjectile, start, transform.rotation);
+        LightProjectile projectile = Instantiate(lightProjectile, start, transform.rotation);
         projectile.SetSpeed(lightProjectileSpeed);
     }
 
     private void HeavySpell()
     {
-        if (isDead) return;
-        
-        var start = transform.position;
+        Vector3 start = transform.position;
         start += new Vector3(0, 1, 0);
-        var projectile = Instantiate(heavyProjectile, start, transform.rotation);
+        HeavyProjectile projectile = Instantiate(heavyProjectile, start, transform.rotation);
         projectile.SetSpeed(heavyProjectileSpeed);
     }
     

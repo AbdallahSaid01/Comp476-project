@@ -18,16 +18,13 @@ namespace AI.States
             
             if (distanceToPlayer > enemy.AttackDistance || Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
             {
-                if (enemy.HasAnimationAttack)
-                {
-                    enemy.Animator.SetTrigger("InterruptAttack");
-                }
                 nextState = new Chase(enemy);
                 stage = StateEvent.Exit;
                 
                 return;
             }
             
+            Debug.Log(enemy.CanAttack);
             if (!enemy.CanAttack) return;
 
             if (enemy.HasAnimationAttack)
@@ -35,16 +32,16 @@ namespace AI.States
                 enemy.Animator.SetInteger("State", 0);
                 enemy.Agent.SetDestination(enemy.transform.position);
                 enemy.Agent.IsStopped = true;
-                enemy.Agent.ControlRotation = false;
-
-                enemy.Attack();
+                
+                // TODO Rotate towards player first
+                enemy.Animator.SetInteger("State", 0);
+                enemy.Animator.SetTrigger("Attack");
                 enemy.ResetAttackTimer();
             }
             else
             {
                 enemy.Agent.SetDestination(enemy.Player.transform.position);
                 enemy.Agent.IsStopped = false;
-                enemy.Agent.ControlRotation = true;
                 enemy.Player.Damage(enemy.Damage);
                 enemy.ResetAttackTimer();
             }

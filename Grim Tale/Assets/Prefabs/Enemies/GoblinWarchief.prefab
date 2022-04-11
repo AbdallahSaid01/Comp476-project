@@ -1757,9 +1757,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 20
   attackDistance: 2
-  damage: 1
-  damageCooldown: 1
-  hasAnimationAttack: 0
   type: 3
   upgradeType: 3
 --- !u!114 &8180658440328195262
@@ -1776,10 +1773,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   agentRadius: 0.3
-  maximumSpeed: 4
-  maximumAcceleration: 8
-  maximumAngularVelocity: 360
-  maximumAngularAcceleration: 540
+  maximumSpeed: 2.5
+  maximumAcceleration: 4
+  maximumAngularVelocity: 180
+  maximumAngularAcceleration: 360
   arriveOrientation: 0.1
   slowDownOrientation: 45
   rotationTimeToTarget: 0.5
