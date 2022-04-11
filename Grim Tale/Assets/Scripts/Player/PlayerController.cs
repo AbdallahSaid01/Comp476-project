@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         manaBar.SetMaxMana(maxMana);
         health = maxHealth;
         mana = maxMana;
+        gold = 0;
     }
 
     private void Update()
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
             Rotate();
             Animate();
         }
-
+        
     }
 
     public void Damage(int amount)
@@ -84,6 +85,11 @@ public class PlayerController : MonoBehaviour
     public void Loot(int amount)
     {
         gold += amount;
+    }
+
+    public int getGold()
+    {
+        return gold;
     }
 
     public void Heal(int amount)

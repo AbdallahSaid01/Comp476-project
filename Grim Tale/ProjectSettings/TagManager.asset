@@ -11,6 +11,7 @@ TagManager:
   - Obstacle
   - Enemy
   - Level
+  - goldtext
   layers:
   - Default
   - TransparentFX

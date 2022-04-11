@@ -5,10 +5,13 @@ using UnityEngine;
 public class GoldScript : MonoBehaviour
 {
     private int value;
+    private goldText goldtext;
+    private int currentGold;
 
     void Start()
     {
-        value = Random.Range(1, 10);
+        goldtext = GameObject.FindGameObjectWithTag("goldtext").GetComponent<goldText>();
+        value = currentGold + Random.Range(1, 10);
     }
 
     public void SetValue(int val)
@@ -23,6 +26,8 @@ public class GoldScript : MonoBehaviour
         if (!player) return;
         
         player.Loot(value);
+        currentGold = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getGold();
+        goldtext.updateGoldText(currentGold);
         Destroy(gameObject);
     }
 }
