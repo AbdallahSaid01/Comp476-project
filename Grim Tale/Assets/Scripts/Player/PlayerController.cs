@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lightProjectileSpeed;
     [SerializeField] private float heavyProjectileSpeed;
     [SerializeField] private float heavyAttackTime = 0.5f;
+    [SerializeField] private int heavyManaCost = 2;
 
     [HideInInspector] public PlayerInput input;
     private CharacterController controller;
@@ -23,7 +24,9 @@ public class PlayerController : MonoBehaviour
     private float timeRemaining;
     private float lightSpell;
     private float heavySpell;
-    
+
+    public HealthBar healthBar;
+    public ManaBar manaBar;
     private int maxHealth = 5;
     private int health;
     private int maxMana = 5;
@@ -47,6 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         camOffset = new Vector3(0f, 11.11f, -4.18f);
         timeRemaining = heavyAttackTime;
+        healthBar.SetMaxHealth(maxHealth);
+        manaBar.SetMaxMana(maxMana);
         health = maxHealth;
         mana = maxMana;
     }
@@ -69,7 +74,7 @@ public class PlayerController : MonoBehaviour
     public void Damage(int amount)
     {
         health = Mathf.Max(health - amount, 0);
-
+        healthBar.SetHealth(health);
         if (isDead || !health.Equals(0)) return;
         
         isDead = true;
@@ -84,11 +89,21 @@ public class PlayerController : MonoBehaviour
     public void Heal(int amount)
     {
         health = Mathf.Min(health + amount, maxHealth);
+        healthBar.SetHealth(health);
     }
 
     public void RegenMana(int amount)
     {
         mana = Mathf.Min(mana + amount, maxMana);
+        manaBar.SetMana(mana);
+    }
+
+    private void heavySpellCasted(int amount)
+    {
+        if(amount <= mana)
+            mana -= amount;
+
+        manaBar.SetMana(mana);
     }
 
     private void View()
@@ -218,9 +233,10 @@ public class PlayerController : MonoBehaviour
     {
         heavySpell = context.action.ReadValue<float>();
 
-        if (Math.Abs(heavySpell - 1) < 0.01f)
+        if (Math.Abs(heavySpell - 1) < 0.01f && mana > heavyManaCost)
         {
             HeavySpell();
+            heavySpellCasted(heavyManaCost);
         }
     }
 
