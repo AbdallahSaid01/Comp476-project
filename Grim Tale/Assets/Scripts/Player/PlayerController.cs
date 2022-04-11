@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
     {
         health = Mathf.Max(health - amount, 0);
         
-        Debug.Log(health);
         if (health.Equals(0))
         {
             // Die

@@ -14,7 +14,9 @@ namespace AI.States
         public override void Enter()
         {
             enemy.Agent.MaximumSpeed = 6f;
-            
+            enemy.Agent.ControlRotation = true;
+            enemy.Agent.IsStopped = false;
+
             enemy.Animator.SetInteger("State", 2);
 
             var playerPosition = enemy.Player.transform.position;
