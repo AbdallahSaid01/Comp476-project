@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
+    /*
     private int value;
 
     void Start()
@@ -25,4 +26,5 @@ public class HealthScript : MonoBehaviour
         player.Heal(value);
         Destroy(gameObject.transform.parent.parent.gameObject);
     }
+    */
 }

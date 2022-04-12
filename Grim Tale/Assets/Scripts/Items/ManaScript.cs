@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ManaScript : MonoBehaviour
 {
+    /*
     private int value;
 
     void Start()
@@ -25,4 +26,5 @@ public class ManaScript : MonoBehaviour
         player.RegenMana(value);
         Destroy(gameObject.transform.parent.parent.gameObject);
     }
+    */
 }

@@ -1988,7 +1988,16 @@ MonoBehaviour:
   heavyProjectile: {fileID: 262562787326641322, guid: 07a4491c857064bce8b19936ba6d5c21, type: 3}
   lightProjectileSpeed: 10
   heavyProjectileSpeed: 5
+  lightProjectileDamage: 1
+  heavyProjectileDamage: 3
+  scaleAttackDMG: 0.1
+  scaleAttackSPD: 0.1
   heavyAttackTime: 0.5
+  heavyManaCost: 2
+  healHPScale: 0.25
+  healManaScale: 0.25
+  healthBar: {fileID: 0}
+  manaBar: {fileID: 0}
 --- !u!1 &178660
 GameObject:
   m_ObjectHideFlags: 0

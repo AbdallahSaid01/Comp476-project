@@ -9,8 +9,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HeavyProjectile heavyProjectile;
     [SerializeField] private float lightProjectileSpeed;
     [SerializeField] private float heavyProjectileSpeed;
+    [SerializeField] private float lightProjectileDamage;
+    [SerializeField] private float heavyProjectileDamage;
+    //If these are changed, change the text in the buy menu!
+    [SerializeField] private float scaleAttackDMG;
+    [SerializeField] private float scaleAttackSPD;
+    ////////////////////////////////////////////////////////
     [SerializeField] private float heavyAttackTime = 0.5f;
     [SerializeField] private int heavyManaCost = 2;
+    private float attackSPDIncrementLight;
+    private float attackSPDIncrementHeavy;
+    private float attackDMGincrementLight;
+    private float attackDMGincrementHeavy;
 
     [HideInInspector] public PlayerInput input;
     private CharacterController controller;
@@ -25,12 +35,17 @@ public class PlayerController : MonoBehaviour
     private float lightSpell;
     private float heavySpell;
 
+    [SerializeField] private float healHPScale;
+    [SerializeField] private float healManaScale;
+    private float HpIncrement;
+    private float ManaIncrement;
     public HealthBar healthBar;
     public ManaBar manaBar;
-    private int maxHealth = 5;
-    private int health;
-    private int maxMana = 5;
-    private int mana;
+    private float maxHealth = 5.0f;
+    private float health;
+    private float maxMana = 5.0f;
+    private float mana;
+    private goldText goldtext;
     private int gold;
 
     private bool isDead;
@@ -50,10 +65,21 @@ public class PlayerController : MonoBehaviour
     {
         camOffset = new Vector3(0f, 11.11f, -4.18f);
         timeRemaining = heavyAttackTime;
+
+        //Fixed increments for scaling
+        attackSPDIncrementLight = scaleAttackSPD * lightProjectileSpeed;
+        attackSPDIncrementHeavy = scaleAttackSPD * heavyProjectileSpeed;
+        attackDMGincrementLight = scaleAttackDMG * lightProjectileDamage;
+        attackDMGincrementHeavy = scaleAttackDMG * heavyProjectileDamage;
+
+        //UI elements to initialize
+        HpIncrement = maxHealth * healHPScale;
+        ManaIncrement = maxMana * healManaScale;
         healthBar.SetMaxHealth(maxHealth);
         manaBar.SetMaxMana(maxMana);
         health = maxHealth;
         mana = maxMana;
+        goldtext = GameObject.FindGameObjectWithTag("goldtext").GetComponent<goldText>();
         gold = 0;
     }
 
@@ -69,7 +95,7 @@ public class PlayerController : MonoBehaviour
             Rotate();
             Animate();
         }
-        
+
     }
 
     public void Damage(int amount)
@@ -92,15 +118,41 @@ public class PlayerController : MonoBehaviour
         return gold;
     }
 
-    public void Heal(int amount)
+    public void setGold(int amount)
     {
-        health = Mathf.Min(health + amount, maxHealth);
+        gold = amount;
+        goldtext.updateGoldText(gold);
+    }
+
+    public void incrementLightAttackDMG()
+    {
+        lightProjectileDamage += attackDMGincrementLight;
+    }
+
+    public void incrementHeavyAttackDMG()
+    {
+        heavyProjectileDamage += attackDMGincrementHeavy;
+    }
+
+    public void incrementLightAttackSPD()
+    {
+        lightProjectileSpeed += attackSPDIncrementLight;
+    }
+
+    public void incrementHeavyAttackSPD()
+    {
+        heavyProjectileSpeed += attackSPDIncrementHeavy;
+    }
+
+    public void Heal()
+    {
+        health = Mathf.Min(health + HpIncrement, maxHealth);
         healthBar.SetHealth(health);
     }
 
-    public void RegenMana(int amount)
+    public void RegenMana()
     {
-        mana = Mathf.Min(mana + amount, maxMana);
+        mana = Mathf.Min(mana + ManaIncrement, maxMana);
         manaBar.SetMana(mana);
     }
 
