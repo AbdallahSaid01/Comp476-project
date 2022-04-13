@@ -1699,7 +1699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497534}
   - component: {fileID: 9508676}
-  - component: {fileID: 4505545726805577815}
+  - component: {fileID: -3150531264236321702}
   - component: {fileID: 8180658440328195262}
   m_Layer: 0
   m_Name: GoblinWarchief
@@ -1743,7 +1743,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4505545726805577815
+--- !u!114 &-3150531264236321702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1752,11 +1752,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 173802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d6984d0ba88c9428b6d00da52561c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 72f88b67cfc693446abd88bc68533eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 20
-  attackDistance: 2
+  attackDistance: 5
   damage: 1
   damageCooldown: 1
   hasAnimationAttack: 0

@@ -338,7 +338,7 @@ namespace AI.Pathfinding
             // Path smoothing
             for (var i = index + 1; i < path.Count; i++)
             {
-                var position = transform.position;
+                var position = transform.position + 0.1f * Vector3.up;
                 var nextNodePosition = path[i].transform.position;
                 var nextNodeAdjustedPosition = new Vector3(nextNodePosition.x, position.y, nextNodePosition.z);
                 var direction = nextNodeAdjustedPosition - position;

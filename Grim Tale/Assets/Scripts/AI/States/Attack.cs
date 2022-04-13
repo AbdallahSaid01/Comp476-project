@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace AI.States
@@ -11,21 +12,52 @@ namespace AI.States
 
         public override void Update()
         {
-            var playerPosition = enemy.Player.transform.position;
-            var enemyPosition = enemy.transform.position;
-            var distanceToPlayer = Vector3.Distance(playerPosition, enemyPosition);
-            var directionToPlayer = playerPosition - enemyPosition;
-            
-            if (distanceToPlayer > enemy.AttackDistance || Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
+            if (enemy.Type.Equals(EnemyType.GoblinWarchief))
             {
-                if (enemy.HasAnimationAttack)
+                var target = Object.FindObjectsOfType<Enemy>().Where(x => x != enemy).OrderBy(x => Vector3.Distance(x.transform.position, enemy.transform.position)).First(); // TODO Take from an eventual GameManager
+                if (target)
                 {
-                    enemy.Animator.SetTrigger("InterruptAttack");
-                }
-                nextState = new Chase(enemy);
-                stage = StateEvent.Exit;
+                    var targetPosition = target.transform.position;
+                    var enemyPosition = enemy.transform.position;
+                    var distanceToTarget = Vector3.Distance(targetPosition, enemyPosition);
+                    var directionToTarget = targetPosition - enemyPosition;
+                    
+                    if (distanceToTarget > enemy.AttackDistance || Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToTarget, distanceToTarget, LayerMask.GetMask("Obstacle")))
+                    {
+                        if (enemy.HasAnimationAttack)
+                        {
+                            enemy.Animator.SetTrigger("InterruptAttack");
+                        }
+                        nextState = new Follow(enemy);
+                        stage = StateEvent.Exit;
                 
-                return;
+                        return;
+                    }
+                }
+                else
+                {
+                    nextState = new Follow(enemy);
+                    stage = StateEvent.Exit;
+                }
+            }
+            else
+            {
+                var playerPosition = enemy.Player.transform.position;
+                var enemyPosition = enemy.transform.position;
+                var distanceToPlayer = Vector3.Distance(playerPosition, enemyPosition);
+                var directionToPlayer = playerPosition - enemyPosition;
+            
+                if (distanceToPlayer > enemy.AttackDistance || Physics.Raycast(enemyPosition + Vector3.up * 0.1f, directionToPlayer, distanceToPlayer, LayerMask.GetMask("Obstacle")))
+                {
+                    if (enemy.HasAnimationAttack)
+                    {
+                        enemy.Animator.SetTrigger("InterruptAttack");
+                    }
+                    nextState = new Chase(enemy);
+                    stage = StateEvent.Exit;
+                
+                    return;
+                }
             }
             
             if (!enemy.CanAttack) return;

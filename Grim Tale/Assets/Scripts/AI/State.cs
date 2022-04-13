@@ -38,6 +38,6 @@ namespace AI
         }
     }
 
-    public enum StateName { Idle, Chase, Formation, Attack, Charge }
+    public enum StateName { Idle, Chase, Formation, Attack, Charge, Follow }
     public enum StateEvent { Enter, Update, Exit }
 }

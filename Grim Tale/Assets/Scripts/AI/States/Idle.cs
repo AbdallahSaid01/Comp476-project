@@ -20,6 +20,14 @@ namespace AI.States
 
         public override void Update()
         {
+            if (enemy.Type.Equals(EnemyType.GoblinWarchief))
+            {
+                nextState = new Follow(enemy);
+                stage = StateEvent.Exit;
+
+                return;
+            }
+            
             var playerPosition = enemy.Player.transform.position;
             var enemyPosition = enemy.transform.position;
             var distanceToPlayer = Vector3.Distance(playerPosition, enemyPosition);
