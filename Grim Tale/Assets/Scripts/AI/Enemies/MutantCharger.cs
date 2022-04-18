@@ -13,19 +13,6 @@ namespace AI.Enemies
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player") || state.name != StateName.Charge) return;
-            
-            if (!knockedDown)
-            {
-                knockedDownDirection = -((Charge) state).ChargeDirection.normalized;
-                
-                agent.IsStopped = true;
-                agent.Path = null;
-                knockedDown = true;
-                animator.SetTrigger("KnockedDown");
-                PushBack();
-            }
-
             if (other.transform.tag == "LightProjectile")
             {
                 Vector3 positionVector = other.transform.position;
@@ -39,6 +26,19 @@ namespace AI.Enemies
                 Instantiate(heavyAttackParticleSystemInChild, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying
+            }
+
+            if (!other.CompareTag("Player") || state.name != StateName.Charge) return;
+            
+            if (!knockedDown)
+            {
+                knockedDownDirection = -((Charge) state).ChargeDirection.normalized;
+                
+                agent.IsStopped = true;
+                agent.Path = null;
+                knockedDown = true;
+                animator.SetTrigger("KnockedDown");
+                PushBack();
             }
         }
 
