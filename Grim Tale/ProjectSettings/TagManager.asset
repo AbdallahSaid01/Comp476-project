@@ -12,6 +12,9 @@ TagManager:
   - Enemy
   - Level
   - goldtext
+  - end
+  - start
+  - enemies
   layers:
   - Default
   - TransparentFX

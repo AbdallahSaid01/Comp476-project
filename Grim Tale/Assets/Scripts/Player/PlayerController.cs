@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -53,6 +54,16 @@ public class PlayerController : MonoBehaviour
     private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Direction = Animator.StringToHash("Direction");
 
+    //Static variables for transition
+    private static int goldStatic;
+    private static float healthStatic;
+    private static float manaStatic;
+    private static float lightProjectileSpeedStatic;
+    private static float heavyProjectileSpeedStatic;
+    private static float lightProjectileDamageStatic;
+    private static float heavyProjectileDamageStatic;
+
+
     private void Awake()
     {
         input = new PlayerInput();
@@ -75,16 +86,51 @@ public class PlayerController : MonoBehaviour
         //UI elements to initialize
         HpIncrement = maxHealth * healHPScale;
         ManaIncrement = maxMana * healManaScale;
-        healthBar.SetMaxHealth(maxHealth);
-        manaBar.SetMaxMana(maxMana);
-        health = maxHealth;
-        mana = maxMana;
         goldtext = GameObject.FindGameObjectWithTag("goldtext").GetComponent<goldText>();
-        gold = 0;
+
+        if (SceneManager.GetActiveScene().buildIndex <= 1)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+            manaBar.SetMaxMana(maxMana);
+            health = maxHealth;
+            mana = maxMana;
+            gold = 0;
+        }
+        else
+        {
+            healthBar.SetMaxHealth(maxHealth);
+            manaBar.SetMaxMana(maxMana);
+            health = healthStatic;
+            mana = manaStatic;
+            healthBar.SetHealth(health);
+            manaBar.SetMana(mana);
+
+            lightProjectileSpeed = lightProjectileSpeedStatic;
+            heavyProjectileSpeed = heavyProjectileSpeedStatic;
+            lightProjectileDamage = lightProjectileDamageStatic;
+            heavyProjectileDamage = heavyProjectileDamageStatic;
+
+            gold = goldStatic;
+            goldtext.updateGoldText(gold);
+        }
+        
     }
 
     private void Update()
     {
+        //Update static variable
+        healthStatic = health;
+        manaStatic = mana;
+        lightProjectileSpeedStatic = lightProjectileSpeed;
+        heavyProjectileSpeedStatic = heavyProjectileSpeed;
+        lightProjectileDamageStatic = lightProjectileDamage;
+        heavyProjectileDamageStatic = heavyProjectileDamage;
+        goldStatic = gold;
+
+        //Debug.Log(health);
+        //Debug.Log(mana);
+
+
         if (isDead) return;
         
         View();

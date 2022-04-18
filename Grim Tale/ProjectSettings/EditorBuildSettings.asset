@@ -9,7 +9,19 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 7c82793fcc5822342ae0d0e5a5f57f25
   - enabled: 1
-    path: Assets/Scenes/Playgrounds/CharacterPlayground.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/lvl 1.unity
+    guid: a477dc786b12ea242b36481649d85186
+  - enabled: 1
+    path: Assets/Scenes/lvl 2.unity
+    guid: 1755b5a081b895c4287958410dbfb388
+  - enabled: 1
+    path: Assets/Scenes/lvl 3.unity
+    guid: 4f887c56052c1784f8c8321f4c549b22
+  - enabled: 1
+    path: Assets/Scenes/lvl 4.unity
+    guid: af605c051f7e5674a8a08f5112465bdd
+  - enabled: 1
+    path: Assets/Scenes/lvl 5.unity
+    guid: 6ec6f8ffa1f62c948b9822e1a11ae665
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 869bea679c0a8d846b8bcead53f025c3, type: 2}
