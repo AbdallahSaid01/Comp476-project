@@ -1701,6 +1701,7 @@ GameObject:
   - component: {fileID: 9508676}
   - component: {fileID: -3150531264236321702}
   - component: {fileID: 8180658440328195262}
+  - component: {fileID: 6472563673037039085}
   m_Layer: 0
   m_Name: GoblinWarchief
   m_TagString: Untagged
@@ -1785,6 +1786,20 @@ MonoBehaviour:
   arriveOrientation: 0.1
   slowDownOrientation: 45
   rotationTimeToTarget: 0.5
+--- !u!136 &6472563673037039085
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.38
+  m_Height: 2.11
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &175598
 GameObject:
   m_ObjectHideFlags: 0

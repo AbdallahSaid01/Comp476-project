@@ -5,6 +5,9 @@ namespace AI.Enemies
 {
     public class MutantCharger : Enemy
     {
+        [SerializeField] private ParticleSystem heavyAttackParticleSystemInChild;
+        [SerializeField] private ParticleSystem lightAttackParticleSystemInChild;
+
         private bool knockedDown;
         private Vector3 knockedDownDirection;
 
@@ -21,6 +24,21 @@ namespace AI.Enemies
                 knockedDown = true;
                 animator.SetTrigger("KnockedDown");
                 PushBack();
+            }
+
+            if (other.transform.tag == "LightProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(lightAttackParticleSystemInChild, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying. Right now the enemy just dies immediately
+            }
+            else if (other.transform.tag == "HeavyProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(heavyAttackParticleSystemInChild, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying
             }
         }
 
