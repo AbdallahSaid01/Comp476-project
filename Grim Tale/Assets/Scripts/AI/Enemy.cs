@@ -15,6 +15,8 @@ namespace AI
         [SerializeField] private bool hasAnimationAttack;
         [SerializeField] private EnemyType type;
         [SerializeField] private EnemyType upgradeType;
+        [SerializeField] private ParticleSystem heavyAttackParticleSystem;
+        [SerializeField] private ParticleSystem lightAttackParticleSystem;
 
         protected PathfindingAgent agent;
         protected State state;
@@ -42,6 +44,24 @@ namespace AI
                 state = state?.Process();
 
             attackTimer -= Time.deltaTime;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.transform.tag == "LightProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(lightAttackParticleSystem, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying. Right now the enemy just dies immediately
+            }
+            else if (other.transform.tag == "HeavyProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(heavyAttackParticleSystem, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying
+            }
         }
 
         // private void OnTriggerEnter(Collider other)

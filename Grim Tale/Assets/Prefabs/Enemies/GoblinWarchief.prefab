@@ -1762,6 +1762,8 @@ MonoBehaviour:
   hasAnimationAttack: 1
   type: 3
   upgradeType: 3
+  heavyAttackParticleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
+  lightAttackParticleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
 --- !u!114 &8180658440328195262
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5627962240971134759}
   m_Layer: 0
   m_Name: Light Projectile
-  m_TagString: Untagged
+  m_TagString: LightProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 2
-  particleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
 --- !u!54 &5627962240971134759
 Rigidbody:
   m_ObjectHideFlags: 0

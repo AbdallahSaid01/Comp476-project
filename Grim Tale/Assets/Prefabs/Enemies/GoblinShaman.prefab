@@ -2546,6 +2546,8 @@ MonoBehaviour:
   hasAnimationAttack: 1
   type: 2
   upgradeType: 3
+  heavyAttackParticleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
+  lightAttackParticleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
   enemyProjectilePrefab: {fileID: 7455747758524728853, guid: 332d90fd2a1a07649b6f1004a034ab93, type: 3}
   projectileSpawnPosition: {fileID: 7304378703401288497}
 --- !u!114 &5220357027604572743
