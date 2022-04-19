@@ -2485,6 +2485,7 @@ GameObject:
   - component: {fileID: 9585324}
   - component: {fileID: 6580799380659201977}
   - component: {fileID: 5220357027604572743}
+  - component: {fileID: 4686000382969187685}
   m_Layer: 0
   m_Name: GoblinShaman
   m_TagString: Untagged
@@ -2539,6 +2540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479502039a5ffcf4aa60e2ae9dbee233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
   chaseDistance: 20
   attackDistance: 10
   damage: 1
@@ -2546,6 +2548,8 @@ MonoBehaviour:
   hasAnimationAttack: 1
   type: 2
   upgradeType: 3
+  killParticleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
+  damageParticleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
   enemyProjectilePrefab: {fileID: 7455747758524728853, guid: 332d90fd2a1a07649b6f1004a034ab93, type: 3}
   projectileSpawnPosition: {fileID: 7304378703401288497}
 --- !u!114 &5220357027604572743
@@ -2569,6 +2573,20 @@ MonoBehaviour:
   arriveOrientation: 0.1
   slowDownOrientation: 45
   rotationTimeToTarget: 0.5
+--- !u!136 &4686000382969187685
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.38
+  m_Height: 2.11
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &196770
 GameObject:
   m_ObjectHideFlags: 0

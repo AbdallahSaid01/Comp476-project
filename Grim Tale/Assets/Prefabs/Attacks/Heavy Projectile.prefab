@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 846843188285321341}
   m_Layer: 0
   m_Name: Heavy Projectile
-  m_TagString: Untagged
+  m_TagString: HeavyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 2
-  particleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
 --- !u!54 &846843188285321341
 Rigidbody:
   m_ObjectHideFlags: 0

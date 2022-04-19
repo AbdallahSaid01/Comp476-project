@@ -12,9 +12,14 @@ namespace AI
         [SerializeField] private float attackDistance = 2f;
         [SerializeField] protected int damage = 1;
         [SerializeField] private float damageCooldown = 1f;
+        [SerializeField] protected float health = 50f;
+        [SerializeField] protected float damageByLightAttack = 10f;
+        [SerializeField] protected float damageByHeavyAttack = 30f;
         [SerializeField] private bool hasAnimationAttack;
         [SerializeField] private EnemyType type;
         [SerializeField] private EnemyType upgradeType;
+        [SerializeField] protected ParticleSystem killParticleSystem;
+        [SerializeField] protected ParticleSystem damageParticleSystem;
 
         protected PathfindingAgent agent;
         protected State state;
@@ -42,6 +47,36 @@ namespace AI
                 state = state?.Process();
 
             attackTimer -= Time.deltaTime;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.transform.tag == "LightProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(damageParticleSystem, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                health -= damageByLightAttack;
+
+                if (health <= 0)
+                {
+                    Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Destroy(gameObject);
+                }
+            }
+            else if (other.transform.tag == "HeavyProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(damageParticleSystem, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                health -= damageByHeavyAttack;
+
+                if (health <= 0)
+                {
+                    Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Destroy(gameObject);
+                }
+            }
         }
 
         // private void OnTriggerEnter(Collider other)

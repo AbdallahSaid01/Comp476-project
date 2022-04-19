@@ -3,7 +3,6 @@ using UnityEngine;
 public class LightProjectile : MonoBehaviour
 {
     [SerializeField] private float timeToDeath = 2f;
-    [SerializeField] private ParticleSystem particleSystem;
 
     private float speed;
 
@@ -28,13 +27,7 @@ public class LightProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Enemy"))
-        {
-            var positionVector = collider.transform.position;
-            Instantiate(particleSystem, positionVector, transform.rotation);
-            Destroy(gameObject);
-        }
-        else if (collider.gameObject.CompareTag("Level"))
+        if (collider.gameObject.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
         }

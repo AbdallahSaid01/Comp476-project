@@ -10,6 +10,33 @@ namespace AI.Enemies
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.transform.tag == "LightProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(damageParticleSystem, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                health -= damageByLightAttack;
+
+                if (health <= 0)
+                {
+                    Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Destroy(gameObject);
+                }
+            }
+            else if (other.transform.tag == "HeavyProjectile")
+            {
+                Vector3 positionVector = other.transform.position;
+                Instantiate(damageParticleSystem, positionVector, transform.rotation);
+                Destroy(other.gameObject);
+                health -= damageByHeavyAttack;
+
+                if (health <= 0)
+                {
+                    Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Destroy(gameObject);
+                }
+            }
+
             if (!other.CompareTag("Player") || state.name != StateName.Charge) return;
             
             if (!knockedDown)
