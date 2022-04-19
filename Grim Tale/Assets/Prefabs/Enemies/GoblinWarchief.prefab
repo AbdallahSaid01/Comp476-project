@@ -1756,6 +1756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f88b67cfc693446abd88bc68533eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 70
   chaseDistance: 20
   attackDistance: 5
   damage: 1
@@ -1763,8 +1764,8 @@ MonoBehaviour:
   hasAnimationAttack: 1
   type: 3
   upgradeType: 3
-  heavyAttackParticleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
-  lightAttackParticleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
+  killParticleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
+  damageParticleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
 --- !u!114 &8180658440328195262
 MonoBehaviour:
   m_ObjectHideFlags: 0

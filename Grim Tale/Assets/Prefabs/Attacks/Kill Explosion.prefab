@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4931670425899275656}
   - component: {fileID: 7455863774086892437}
   - component: {fileID: 8654984750241522207}
-  - component: {fileID: 4184246574066151546}
+  - component: {fileID: 8768300168645334389}
   m_Layer: 0
-  m_Name: Small Explosion
+  m_Name: Kill Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2596517014589712996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,7 +107,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2596517014589712996}
   serializedVersion: 7
-  lengthInSec: 1
+  lengthInSec: 2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
@@ -1393,7 +1393,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1401,16 +1401,16 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.9655173, g: 1, b: 0, a: 0}
-        key1: {r: 1, g: 0.716, b: 0, a: 1}
-        key2: {r: 1, g: 0.1448276, b: 0, a: 1}
+        key0: {r: 0, g: 0.87080383, b: 1, a: 0}
+        key1: {r: 0, g: 0.6772113, b: 1, a: 1}
+        key2: {r: 0, g: 0.07460141, b: 1, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
-        ctime1: 40092
+        ctime0: 578
+        ctime1: 39899
         ctime2: 65535
         ctime3: 0
         ctime4: 0
@@ -1418,7 +1418,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 33346
+        atime1: 33924
         atime2: 59560
         atime3: 0
         atime4: 0
@@ -4776,7 +4776,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &4184246574066151546
+--- !u!114 &8768300168645334389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

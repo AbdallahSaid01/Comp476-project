@@ -5,9 +5,6 @@ namespace AI.Enemies
 {
     public class MutantCharger : Enemy
     {
-        [SerializeField] private ParticleSystem heavyAttackParticleSystemInChild;
-        [SerializeField] private ParticleSystem lightAttackParticleSystemInChild;
-
         private bool knockedDown;
         private Vector3 knockedDownDirection;
 
@@ -16,16 +13,28 @@ namespace AI.Enemies
             if (other.transform.tag == "LightProjectile")
             {
                 Vector3 positionVector = other.transform.position;
-                Instantiate(lightAttackParticleSystemInChild, positionVector, transform.rotation);
+                Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
-                Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying. Right now the enemy just dies immediately
+                health -= damageByLightAttack;
+
+                if (health <= 0)
+                {
+                    Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Destroy(gameObject);
+                }
             }
             else if (other.transform.tag == "HeavyProjectile")
             {
                 Vector3 positionVector = other.transform.position;
-                Instantiate(heavyAttackParticleSystemInChild, positionVector, transform.rotation);
+                Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
-                Destroy(gameObject); //TODO: give each enemy a number of hit points it can take before dying
+                health -= damageByHeavyAttack;
+
+                if (health <= 0)
+                {
+                    Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Destroy(gameObject);
+                }
             }
 
             if (!other.CompareTag("Player") || state.name != StateName.Charge) return;
