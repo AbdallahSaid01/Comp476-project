@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace AI
@@ -20,6 +19,11 @@ namespace AI
             if (other.TryGetComponent<PlayerController>(out var player))
             {
                 player.Damage(damage);
+            }
+
+            if (other.TryGetComponent<Ally>(out var ally))
+            {
+                ally.DealDamage(damage);
             }
         
             Destroy(gameObject);

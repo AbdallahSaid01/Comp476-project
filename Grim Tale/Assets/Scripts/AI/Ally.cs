@@ -51,7 +51,7 @@ namespace AI
         {
             if (other.transform.CompareTag("LightProjectile"))
             {
-                Vector3 positionVector = other.transform.position;
+                var positionVector = other.transform.position;
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByLightAttack;
@@ -64,7 +64,7 @@ namespace AI
             }
             else if (other.transform.CompareTag("HeavyProjectile"))
             {
-                Vector3 positionVector = other.transform.position;
+                var positionVector = other.transform.position;
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByHeavyAttack;
@@ -85,6 +85,20 @@ namespace AI
         public virtual void Attack()
         {
             player.Damage(damage);
+        }
+
+        public void DealDamage(int amount)
+        {
+            var positionVector = transform.position;
+            Instantiate(damageParticleSystem, positionVector, transform.rotation);
+            health -= damageByHeavyAttack;
+            
+            health -= damage;
+            if (health <= 0)
+            {
+                Instantiate(killParticleSystem, positionVector, transform.rotation);
+                Destroy(gameObject);
+            }
         }
 
         public void ResetAttackTimer()
