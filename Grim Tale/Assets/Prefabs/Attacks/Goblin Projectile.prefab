@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3707425251232832034}
   - component: {fileID: 5627962240971134759}
   - component: {fileID: 7455747758524728853}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Goblin Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
