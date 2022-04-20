@@ -10,9 +10,9 @@ namespace AI.Enemies
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.tag == "LightProjectile")
+            if (other.transform.CompareTag("LightProjectile"))
             {
-                Vector3 positionVector = other.transform.position;
+                var positionVector = other.transform.position;
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByLightAttack;
@@ -23,9 +23,9 @@ namespace AI.Enemies
                     Destroy(gameObject);
                 }
             }
-            else if (other.transform.tag == "HeavyProjectile")
+            else if (other.transform.CompareTag("HeavyProjectile"))
             {
-                Vector3 positionVector = other.transform.position;
+                var positionVector = other.transform.position;
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByHeavyAttack;
@@ -38,17 +38,18 @@ namespace AI.Enemies
             }
 
             if (!other.CompareTag("Player") || state.name != StateName.Charge) return;
+
+            if (knockedDown) return;
             
-            if (!knockedDown)
-            {
-                knockedDownDirection = -((Charge) state).ChargeDirection.normalized;
+            knockedDownDirection = -((Charge) state).ChargeDirection.normalized;
                 
-                agent.IsStopped = true;
-                agent.Path = null;
-                knockedDown = true;
-                animator.SetTrigger("KnockedDown");
-                PushBack();
-            }
+            agent.IsStopped = true;
+            agent.Path = null;
+            knockedDown = true;
+            animator.SetTrigger("KnockedDown");
+            PushBack();
+            
+            player.Damage(damage);
         }
 
         protected override void Update()

@@ -30,7 +30,10 @@ namespace AI.States
 
         public override void Update()
         {
-            var target = Object.FindObjectsOfType<Enemy>().Where(x => x != enemy).OrderBy(x => Vector3.Distance(x.transform.position, enemy.transform.position)).First(); // TODO Take from an eventual GameManager
+            var allies = Object.FindObjectsOfType<Enemy>().Where(x => x != enemy).ToArray();
+            if (allies.Length == 0) return;
+            
+            var target = allies.OrderBy(x => Vector3.Distance(x.transform.position, enemy.transform.position)).First(); // TODO Take from an eventual GameManager
             if (!target) return; // TODO Go to idle?
             
             var targetPosition = target.transform.position;

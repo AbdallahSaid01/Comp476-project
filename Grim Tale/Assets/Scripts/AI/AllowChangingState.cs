@@ -6,7 +6,18 @@ namespace AI
     {
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<Enemy>().StateBlocked = false;
+            var enemy = animator.GetComponent<Enemy>();
+            if (enemy)
+            {
+                enemy.StateBlocked = false;
+                return;
+            }
+
+            var ally = animator.GetComponent<Ally>();
+            if (ally)
+            {
+                ally.StateBlocked = false;
+            }
         }
     }
 }

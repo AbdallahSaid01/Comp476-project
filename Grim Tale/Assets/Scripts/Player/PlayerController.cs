@@ -1,9 +1,10 @@
 using System;
+using AI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHealable
 {
     [SerializeField] private float speed = 4f;
     [SerializeField] private LightProjectile lightProjectile;
@@ -170,6 +171,11 @@ public class PlayerController : MonoBehaviour
         goldtext.updateGoldText(gold);
     }
 
+    public bool IsDamaged()
+    {
+        return health < maxHealth;
+    }
+
     public void incrementLightAttackDMG()
     {
         lightProjectileDamage += attackDMGincrementLight;
@@ -193,6 +199,12 @@ public class PlayerController : MonoBehaviour
     public void Heal()
     {
         health = Mathf.Min(health + HpIncrement, maxHealth);
+        healthBar.SetHealth(health);
+    }
+    
+    public void Heal(int amount)
+    {
+        health = Mathf.Min(health + amount, maxHealth);
         healthBar.SetHealth(health);
     }
 
