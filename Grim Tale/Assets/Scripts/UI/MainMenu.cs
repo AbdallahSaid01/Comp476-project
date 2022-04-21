@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -13,6 +10,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        FindObjectOfType<AudioManager>().StartMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -23,5 +21,4 @@ public class MainMenu : MonoBehaviour
         #endif
         Application.Quit();
     }
-
 }

@@ -10,8 +10,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip enemyKilled;
     [SerializeField] private AudioClip goldInteract;
     [SerializeField] private AudioClip playerHit;
+    [SerializeField] private AudioClip mutantCharge;
     
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource musicSource;
 
     private void Awake()
     {
@@ -19,6 +21,11 @@ public class AudioManager : MonoBehaviour
         audioSource ??= GetComponent<AudioSource>();
     }
 
+    public void StartMusic()
+    {
+        musicSource.Play();
+    }
+    
     public void PlayOneShot(Clip clip)
     {
         audioSource.pitch = Random.Range(0.75f, 1.25f);
@@ -45,10 +52,12 @@ public class AudioManager : MonoBehaviour
                 return goldInteract;
             case Clip.PlayerHit:
                 return playerHit;
+            case Clip.MutantCharge:
+                return mutantCharge;
             default:
                 return lightCast;
         }
     }
 }
 
-public enum Clip { LightCast, HeavyCast, ProjectileDestroy, EnemyHitByLightAttack, EnemyHitByHeavyAttack, EnemyKilled, GoldInteract, PlayerHit }
+public enum Clip { LightCast, HeavyCast, ProjectileDestroy, EnemyHitByLightAttack, EnemyHitByHeavyAttack, EnemyKilled, GoldInteract, PlayerHit, MutantCharge }
