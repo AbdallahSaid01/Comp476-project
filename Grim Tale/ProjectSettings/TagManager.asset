@@ -17,6 +17,10 @@ TagManager:
   - enemies
   - LightProjectile
   - HeavyProjectile
+  - skelly
+  - charger
+  - warchief
+  - shaman
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,6 @@ public class levelTransition : MonoBehaviour
     GameObject enemies;
     GameObject player;
     public TMP_Text end;
-    private bool nextLevel = false;
     private bool check = true;
     private const int maxIndex = 5;
     private float transitionTime = 3.0f;

@@ -1163,6 +1163,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 10
+  attackDistance: 2
+  damage: 1
+  damageCooldown: 1
+  health: 50
+  damageByLightAttack: 10
+  damageByHeavyAttack: 30
+  hasAnimationAttack: 0
+  type: 0
+  upgradeType: 0
+  killParticleSystem: {fileID: 0}
+  damageParticleSystem: {fileID: 0}
 --- !u!114 &9147483882447340819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,6 +1187,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
+  agentRadius: 0.3
+  maximumSpeed: 2.5
+  maximumAcceleration: 4
+  maximumAngularVelocity: 180
+  maximumAngularAcceleration: 360
+  arriveOrientation: 0.1
+  slowDownOrientation: 45
+  rotationTimeToTarget: 0.5
 --- !u!1 &147430
 GameObject:
   m_ObjectHideFlags: 0

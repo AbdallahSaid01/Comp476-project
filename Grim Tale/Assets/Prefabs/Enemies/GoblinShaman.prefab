@@ -2488,7 +2488,7 @@ GameObject:
   - component: {fileID: 4686000382969187685}
   m_Layer: 7
   m_Name: GoblinShaman
-  m_TagString: Untagged
+  m_TagString: shaman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

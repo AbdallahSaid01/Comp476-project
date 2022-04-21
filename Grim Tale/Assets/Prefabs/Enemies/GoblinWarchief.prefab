@@ -1704,7 +1704,7 @@ GameObject:
   - component: {fileID: 6472563673037039085}
   m_Layer: 7
   m_Name: GoblinWarchief
-  m_TagString: Untagged
+  m_TagString: warchief
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

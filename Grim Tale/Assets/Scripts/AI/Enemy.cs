@@ -28,7 +28,9 @@ namespace AI
         protected PlayerController player;
         
         private float attackTimer;
-        
+
+        private float re = .75f;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -47,6 +49,8 @@ namespace AI
                 state = state?.Process();
 
             attackTimer -= Time.deltaTime;
+
+            isTooClose();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -77,6 +81,27 @@ namespace AI
                     Destroy(gameObject);
                 }
             }
+        }
+
+        private void isTooClose()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, re);
+
+            foreach (var hitCollider in hitColliders)
+            {
+                //Add other enemy types.
+                if ((hitCollider.transform.tag == "skelly" || hitCollider.transform.tag == "warchief" || hitCollider.transform.tag == "shaman" || hitCollider.transform.tag == "charger") && hitCollider.transform != gameObject.transform)
+                {
+                    if((hitCollider.transform.position - this.transform.position).magnitude < re)
+                    {
+                        Vector3 direction = ((hitCollider.transform.position - this.transform.position).normalized) * re;
+                        hitCollider.transform.position = this.transform.position + direction;
+                    }
+                    
+                }
+
+            }
+
         }
 
         // private void OnTriggerEnter(Collider other)
