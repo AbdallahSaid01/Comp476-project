@@ -13,7 +13,7 @@ namespace AI.States
         
         public override void Enter()
         {
-            enemy.Agent.MaximumSpeed = 6f;
+            enemy.Agent.MaximumSpeed = 8f;
             enemy.Agent.ControlRotation = true;
             enemy.Agent.IsStopped = false;
 
