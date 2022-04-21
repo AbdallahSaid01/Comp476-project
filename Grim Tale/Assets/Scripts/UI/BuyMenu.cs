@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuyMenu : MonoBehaviour
@@ -41,7 +39,7 @@ public class BuyMenu : MonoBehaviour
     public void buyHP()
     {
         
-        if (pc.getGold() > HpCost)
+        if (pc.getGold() >= HpCost)
         {
             pc.Heal();
             pc.setGold(pc.getGold() - HpCost);
@@ -51,7 +49,7 @@ public class BuyMenu : MonoBehaviour
 
     public void buyMana()
     {
-        if (pc.getGold() > ManaCost)
+        if (pc.getGold() >= ManaCost)
         {
             pc.RegenMana();
             pc.setGold(pc.getGold() - HpCost);
@@ -61,7 +59,7 @@ public class BuyMenu : MonoBehaviour
 
     public void buyAtkSPD()
     {
-        if(pc.getGold() > AtkSPDCost)
+        if(pc.getGold() >= AtkSPDCost)
         {
             pc.incrementLightAttackSPD();
             pc.incrementHeavyAttackSPD();
@@ -72,7 +70,7 @@ public class BuyMenu : MonoBehaviour
 
     public void buyAtkDMG()
     {
-        if (pc.getGold() > AtkDMGCost)
+        if (pc.getGold() >= AtkDMGCost)
         {
             pc.incrementLightAttackDMG();
             pc.incrementHeavyAttackDMG();
@@ -82,7 +80,7 @@ public class BuyMenu : MonoBehaviour
 
     public void buyAlly()
     {
-        if (pc.getGold() > AllyCost)
+        if (pc.getGold() >= AllyCost)
         {
             Instantiate(ally, new Vector3(10.0f, 0f, 12.5f), Quaternion.identity);
             pc.setGold(pc.getGold() - AllyCost);

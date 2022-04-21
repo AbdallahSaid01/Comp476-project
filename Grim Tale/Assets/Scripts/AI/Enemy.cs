@@ -56,47 +56,47 @@ namespace AI
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.tag == "LightProjectile")
+            if (other.transform.CompareTag("LightProjectile"))
             {
-                Vector3 positionVector = other.transform.position;
+                var positionVector = other.transform.position;
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByLightAttack;
 
-                if (health <= 0)
-                {
-                    Instantiate(killParticleSystem, positionVector, transform.rotation);
-                    Destroy(gameObject);
-                }
+                if (!(health <= 0)) return;
+                
+                Instantiate(killParticleSystem, positionVector, transform.rotation);
+                Instantiate(FindObjectOfType<Inventory>().goldPrefab, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
-            else if (other.transform.tag == "HeavyProjectile")
+            else if (other.transform.CompareTag("HeavyProjectile"))
             {
-                Vector3 positionVector = other.transform.position;
+                var positionVector = other.transform.position;
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByHeavyAttack;
 
-                if (health <= 0)
-                {
-                    Instantiate(killParticleSystem, positionVector, transform.rotation);
-                    Destroy(gameObject);
-                }
+                if (!(health <= 0)) return;
+                
+                Instantiate(killParticleSystem, positionVector, transform.rotation);
+                Instantiate(FindObjectOfType<Inventory>().goldPrefab, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
         }
 
         private void isTooClose()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, re);
+            var hitColliders = Physics.OverlapSphere(transform.position, re);
 
             foreach (var hitCollider in hitColliders)
             {
                 //Add other enemy types.
-                if ((hitCollider.transform.tag == "skelly" || hitCollider.transform.tag == "warchief" || hitCollider.transform.tag == "shaman" || hitCollider.transform.tag == "charger") && hitCollider.transform != gameObject.transform)
+                if ((hitCollider.transform.CompareTag("skelly") || hitCollider.transform.CompareTag("warchief") || hitCollider.transform.CompareTag("shaman") || hitCollider.transform.CompareTag("charger")) && hitCollider.transform != gameObject.transform)
                 {
-                    if((hitCollider.transform.position - this.transform.position).magnitude < re)
+                    if((hitCollider.transform.position - transform.position).magnitude < re)
                     {
-                        Vector3 direction = ((hitCollider.transform.position - this.transform.position).normalized) * re;
-                        hitCollider.transform.position = this.transform.position + direction;
+                        var direction = ((hitCollider.transform.position - this.transform.position).normalized) * re;
+                        hitCollider.transform.position = transform.position + direction;
                     }
                     
                 }
