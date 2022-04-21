@@ -1164,11 +1164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d6984d0ba88c9428b6d00da52561c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 10
+  chaseDistance: 8
   attackDistance: 1
   damage: 1
   damageCooldown: 1
   health: 20
+  maxHealth: 50
   damageByLightAttack: 10
   damageByHeavyAttack: 30
   hasAnimationAttack: 0
