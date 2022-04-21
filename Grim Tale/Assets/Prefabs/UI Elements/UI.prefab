@@ -3709,7 +3709,7 @@ MonoBehaviour:
   ManaCost: 20
   AtkSPDCost: 50
   AtkDMGCost: 50
-  AllyCost: 10
+  AllyCost: 50
 --- !u!1 &6002466682043386954
 GameObject:
   m_ObjectHideFlags: 0

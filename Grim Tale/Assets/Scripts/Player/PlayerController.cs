@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IHealable
     private float attackSPDIncrementHeavy;
     private float attackDMGincrementLight;
     private float attackDMGincrementHeavy;
+    private float lightSpellRechargeTimeIncrement;
 
     [HideInInspector] public PlayerInput input;
     private CharacterController controller;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour, IHealable
     private static float heavyProjectileSpeedStatic;
     private static float lightProjectileDamageStatic;
     private static float heavyProjectileDamageStatic;
+    private static float lightSpellRechargeTimeStatic;
 
     private float re = .3f;
 
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour, IHealable
         attackSPDIncrementHeavy = scaleAttackSPD * heavyProjectileSpeed;
         attackDMGincrementLight = scaleAttackDMG * lightProjectileDamage;
         attackDMGincrementHeavy = scaleAttackDMG * heavyProjectileDamage;
+        lightSpellRechargeTimeIncrement = scaleAttackSPD/2 * lightSpellRechargeTime;
 
         //UI elements to initialize
         HpIncrement = maxHealth * healHPScale;
@@ -138,6 +141,7 @@ public class PlayerController : MonoBehaviour, IHealable
         lightProjectileDamageStatic = lightProjectileDamage;
         heavyProjectileDamageStatic = heavyProjectileDamage;
         goldStatic = gold;
+        lightSpellRechargeTimeStatic = lightSpellRechargeTime;
 
         //Debug.Log(health);
         //Debug.Log(mana);
@@ -224,6 +228,7 @@ public class PlayerController : MonoBehaviour, IHealable
     public void incrementLightAttackSPD()
     {
         lightProjectileSpeed += attackSPDIncrementLight;
+        lightSpellRechargeTime -= lightSpellRechargeTimeIncrement;
     }
 
     public void incrementHeavyAttackSPD()
