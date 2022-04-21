@@ -1992,11 +1992,13 @@ MonoBehaviour:
   heavyProjectileSpeed: 5
   lightProjectileDamage: 1
   heavyProjectileDamage: 3
+  rightCastSpawn: {fileID: 2406431298941251339}
+  leftCastSpawn: {fileID: 968461468937672400}
   scaleAttackDMG: 0.1
   scaleAttackSPD: 0.1
   heavyAttackTime: 0.5
   heavyManaCost: 2
-  lightSpellRechargeTime: 0.5
+  lightSpellRechargeTime: 0.9
   healHPScale: 0.25
   healManaScale: 0.25
   healthBar: {fileID: 0}

@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour, IHealable
     private float heavySpell;
     private float lightSpellRechargeRemainingTime;
     private bool lightSpellIsRecharging = false;
+    private bool isLeftCast;
+    private bool nextIsHeavy;
 
     [SerializeField] private float healHPScale;
     [SerializeField] private float healManaScale;
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour, IHealable
     
     private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Direction = Animator.StringToHash("Direction");
+    private static readonly int LeftCast = Animator.StringToHash("LeftCast");
+    private static readonly int RightCast = Animator.StringToHash("RightCast");
 
     //Static variables for transition
     private static int goldStatic;
@@ -161,7 +165,7 @@ public class PlayerController : MonoBehaviour, IHealable
         foreach (var hitCollider in hitColliders)
         {
             //Add other enemy types.
-            if ((hitCollider.transform.tag == "skelly" || hitCollider.transform.tag == "warchief" || hitCollider.transform.tag == "shaman" || hitCollider.transform.tag == "charger") && hitCollider.transform != gameObject.transform)
+            if ((hitCollider.transform.CompareTag("skelly") || hitCollider.transform.CompareTag("warchief") || hitCollider.transform.CompareTag("shaman") || hitCollider.transform.CompareTag("charger")) && hitCollider.transform != gameObject.transform)
             {
                 if ((hitCollider.transform.position - this.transform.position).magnitude < re)
                 {
@@ -327,13 +331,61 @@ public class PlayerController : MonoBehaviour, IHealable
 
         if (!lightSpellIsRecharging)
         {
-            var start = transform.position;
-            start += new Vector3(0, 1, 0);
-            var projectile = Instantiate(lightProjectile, start, transform.rotation);
-            projectile.SetSpeed(lightProjectileSpeed);
-            lightSpellRechargeRemainingTime = lightSpellRechargeTime;
             lightSpellIsRecharging = true;
+            lightSpellRechargeRemainingTime = lightSpellRechargeTime;
+
+            if (isLeftCast)
+            {
+                animator.SetTrigger(LeftCast);
+                isLeftCast = false;
+            }
+            else
+            {
+                animator.SetTrigger(RightCast);
+                isLeftCast = true;
+            }
+            
+            // var start = transform.position;
+            // start += new Vector3(0, 1, 0);
+            // var projectile = Instantiate(lightProjectile, start, transform.rotation);
+            // projectile.SetSpeed(lightProjectileSpeed);
+            // lightSpellRechargeRemainingTime = lightSpellRechargeTime;
+            // lightSpellIsRecharging = true;
         }
+    }
+
+    private void InstantiateLeftSpell()
+    {
+        if (isDead) return;
+
+        if (nextIsHeavy)
+        {
+            var hProjectile = Instantiate(heavyProjectile, leftCastSpawn.position, leftCastSpawn.rotation);
+            hProjectile.SetSpeed(heavyProjectileSpeed);
+            nextIsHeavy = false;
+
+            return;
+        }
+        
+        var lProjectile = Instantiate(lightProjectile, leftCastSpawn.position, leftCastSpawn.rotation);
+        lProjectile.SetSpeed(lightProjectileSpeed);
+    }
+    
+    private void InstantiateRightSpell()
+    {
+        if (isDead) return;
+        
+        if (nextIsHeavy)
+        {
+            var hProjectile = Instantiate(heavyProjectile, rightCastSpawn.position, rightCastSpawn.rotation);
+            hProjectile.SetSpeed(heavyProjectileSpeed);
+            nextIsHeavy = false;
+
+            return;
+        }
+        
+        var projectile = Instantiate(lightProjectile, rightCastSpawn.position, rightCastSpawn.rotation);
+        projectile.SetSpeed(lightProjectileSpeed);
     }
 
     private void LightSpellTimer()
@@ -352,11 +404,24 @@ public class PlayerController : MonoBehaviour, IHealable
     private void HeavySpell()
     {
         if (isDead) return;
+
+        nextIsHeavy = true;
         
-        var start = transform.position;
-        start += new Vector3(0, 1, 0);
-        var projectile = Instantiate(heavyProjectile, start, transform.rotation);
-        projectile.SetSpeed(heavyProjectileSpeed);
+        if (isLeftCast)
+        {
+            animator.SetTrigger(LeftCast);
+            isLeftCast = false;
+        }
+        else
+        {
+            animator.SetTrigger(RightCast);
+            isLeftCast = true;
+        }
+        
+        // var start = transform.position;
+        // start += new Vector3(0, 1, 0);
+        // var projectile = Instantiate(heavyProjectile, start, transform.rotation);
+        // projectile.SetSpeed(heavyProjectileSpeed);
     }
     
     #region Input

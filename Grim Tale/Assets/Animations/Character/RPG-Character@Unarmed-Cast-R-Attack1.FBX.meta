@@ -417,7 +417,7 @@ ModelImporter:
       curves: []
       events:
       - time: 1
-        functionName: Shoot
+        functionName: InstantiateRightSpell
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
