@@ -1994,6 +1994,7 @@ MonoBehaviour:
   scaleAttackSPD: 0.1
   heavyAttackTime: 0.5
   heavyManaCost: 2
+  lightSpellRechargeTime: 0.5
   healHPScale: 0.25
   healManaScale: 0.25
   healthBar: {fileID: 0}

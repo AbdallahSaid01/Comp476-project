@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IHealable
     ////////////////////////////////////////////////////////
     [SerializeField] private float heavyAttackTime = 0.5f;
     [SerializeField] private int heavyManaCost = 2;
+    [SerializeField] private float lightSpellRechargeTime;
     private float attackSPDIncrementLight;
     private float attackSPDIncrementHeavy;
     private float attackDMGincrementLight;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour, IHealable
     private float timeRemaining;
     private float lightSpell;
     private float heavySpell;
+    private float lightSpellRechargeRemainingTime;
+    private bool lightSpellIsRecharging = false;
 
     [SerializeField] private float healHPScale;
     [SerializeField] private float healManaScale;
@@ -115,7 +118,8 @@ public class PlayerController : MonoBehaviour, IHealable
             gold = goldStatic;
             goldtext.updateGoldText(gold);
         }
-        
+
+        lightSpellRechargeRemainingTime = lightSpellRechargeTime;
     }
 
     private void Update()
@@ -145,6 +149,7 @@ public class PlayerController : MonoBehaviour, IHealable
             Animate();
         }
 
+        LightSpellTimer();
     }
 
     private void isTooClose()
@@ -311,11 +316,29 @@ public class PlayerController : MonoBehaviour, IHealable
     private void LightSpell()
     {
         if (isDead) return;
-        
-        var start = transform.position;
-        start += new Vector3(0, 1, 0);
-        var projectile = Instantiate(lightProjectile, start, transform.rotation);
-        projectile.SetSpeed(lightProjectileSpeed);
+
+        if (!lightSpellIsRecharging)
+        {
+            var start = transform.position;
+            start += new Vector3(0, 1, 0);
+            var projectile = Instantiate(lightProjectile, start, transform.rotation);
+            projectile.SetSpeed(lightProjectileSpeed);
+            lightSpellRechargeRemainingTime = lightSpellRechargeTime;
+            lightSpellIsRecharging = true;
+        }
+    }
+
+    private void LightSpellTimer()
+    {
+        if (lightSpellIsRecharging)
+        {
+            if (lightSpellRechargeRemainingTime > 0)
+                lightSpellRechargeRemainingTime -= Time.deltaTime;
+            else
+            {
+                lightSpellIsRecharging = false;
+            }
+        }
     }
 
     private void HeavySpell()
