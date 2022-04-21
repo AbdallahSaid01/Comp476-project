@@ -29,6 +29,7 @@ public class LightProjectile : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Obstacle"))
         {
+            FindObjectOfType<AudioManager>().PlayOneShot(Clip.ProjectileDestroy);
             Destroy(gameObject);
         }
     }

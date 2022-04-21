@@ -25,6 +25,8 @@ public class GoldScript : MonoBehaviour
 
         if (!player) return;
         
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.GoldInteract);
+        
         player.Loot(value);
         currentGold = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getGold();
         goldtext.updateGoldText(currentGold);

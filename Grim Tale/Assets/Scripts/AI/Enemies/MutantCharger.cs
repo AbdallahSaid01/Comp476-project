@@ -20,6 +20,7 @@ namespace AI.Enemies
                 if (health <= 0)
                 {
                     Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Instantiate(FindObjectOfType<Inventory>().goldPrefab, transform.position, Quaternion.identity);
                     Destroy(gameObject);
                 }
             }
@@ -33,6 +34,7 @@ namespace AI.Enemies
                 if (health <= 0)
                 {
                     Instantiate(killParticleSystem, positionVector, transform.rotation);
+                    Instantiate(FindObjectOfType<Inventory>().goldPrefab, transform.position, Quaternion.identity);
                     Destroy(gameObject);
                 }
             }

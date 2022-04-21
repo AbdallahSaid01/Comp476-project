@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeavyProjectile : MonoBehaviour
@@ -7,12 +5,6 @@ public class HeavyProjectile : MonoBehaviour
     [SerializeField] private float timeToDeath = 2f;
 
     private float speed;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,8 +28,9 @@ public class HeavyProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.transform.tag == "Obstacle")
+        if (collider.transform.CompareTag("Obstacle"))
         {
+            FindObjectOfType<AudioManager>().PlayOneShot(Clip.ProjectileDestroy);
             Destroy(gameObject);
         }
     }

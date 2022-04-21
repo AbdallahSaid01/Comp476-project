@@ -62,12 +62,16 @@ namespace AI
                 Instantiate(damageParticleSystem, positionVector, transform.rotation);
                 Destroy(other.gameObject);
                 health -= damageByLightAttack;
+                
+                FindObjectOfType<AudioManager>().PlayOneShot(Clip.EnemyHitByLightAttack);
 
                 if (!(health <= 0)) return;
                 
                 Instantiate(killParticleSystem, positionVector, transform.rotation);
                 Instantiate(FindObjectOfType<Inventory>().goldPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
+                
+                FindObjectOfType<AudioManager>().PlayOneShot(Clip.EnemyKilled);
             }
             else if (other.transform.CompareTag("HeavyProjectile"))
             {
@@ -76,11 +80,15 @@ namespace AI
                 Destroy(other.gameObject);
                 health -= damageByHeavyAttack;
 
+                FindObjectOfType<AudioManager>().PlayOneShot(Clip.EnemyHitByHeavyAttack);
+                
                 if (!(health <= 0)) return;
                 
                 Instantiate(killParticleSystem, positionVector, transform.rotation);
                 Instantiate(FindObjectOfType<Inventory>().goldPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
+                
+                FindObjectOfType<AudioManager>().PlayOneShot(Clip.EnemyKilled);
             }
         }
 

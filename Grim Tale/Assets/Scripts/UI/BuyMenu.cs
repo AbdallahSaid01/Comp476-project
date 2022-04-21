@@ -33,43 +33,46 @@ public class BuyMenu : MonoBehaviour
                 Pause();
             }
         }
-
     }
 
-    public void buyHP()
+    public void BuyHP()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.GoldInteract);
         
         if (pc.getGold() >= HpCost)
         {
             pc.Heal();
             pc.setGold(pc.getGold() - HpCost);
         }
-            
     }
 
-    public void buyMana()
+    public void BuyMana()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.GoldInteract);
+
         if (pc.getGold() >= ManaCost)
         {
             pc.RegenMana();
             pc.setGold(pc.getGold() - HpCost);
         }
-            
     }
 
-    public void buyAtkSPD()
+    public void BuyAtkSPD()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.GoldInteract);
+
         if(pc.getGold() >= AtkSPDCost)
         {
             pc.incrementLightAttackSPD();
             pc.incrementHeavyAttackSPD();
             pc.setGold(pc.getGold() - AtkSPDCost);
         }
-            
     }
 
-    public void buyAtkDMG()
+    public void BuyAtkDMG()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.GoldInteract);
+
         if (pc.getGold() >= AtkDMGCost)
         {
             pc.incrementLightAttackDMG();
@@ -78,8 +81,10 @@ public class BuyMenu : MonoBehaviour
         }
     }
 
-    public void buyAlly()
+    public void BuyAlly()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.GoldInteract);
+
         if (pc.getGold() >= AllyCost)
         {
             Instantiate(ally, new Vector3(10.0f, 0f, 12.5f), Quaternion.identity);

@@ -1373,7 +1373,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9017645494298728014}
         m_TargetAssemblyTypeName: BuyMenu, Assembly-CSharp
-        m_MethodName: buyAtkSPD
+        m_MethodName: BuyAtkSPD
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1506,7 +1506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9017645494298728014}
         m_TargetAssemblyTypeName: BuyMenu, Assembly-CSharp
-        m_MethodName: buyHP
+        m_MethodName: BuyHP
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2416,7 +2416,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9017645494298728014}
         m_TargetAssemblyTypeName: BuyMenu, Assembly-CSharp
-        m_MethodName: buyAtkDMG
+        m_MethodName: BuyAtkDMG
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2549,7 +2549,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9017645494298728014}
         m_TargetAssemblyTypeName: BuyMenu, Assembly-CSharp
-        m_MethodName: buyMana
+        m_MethodName: BuyMana
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2682,7 +2682,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9017645494298728014}
         m_TargetAssemblyTypeName: BuyMenu, Assembly-CSharp
-        m_MethodName: buyAlly
+        m_MethodName: BuyAlly
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

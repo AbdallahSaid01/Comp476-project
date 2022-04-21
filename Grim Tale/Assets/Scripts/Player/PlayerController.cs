@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour, IHealable
         //Debug.Log(health);
         //Debug.Log(mana);
 
-        isTooClose();
+        IsTooClose();
 
         if (isDead) return;
         
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour, IHealable
         LightSpellTimer();
     }
 
-    private void isTooClose()
+    private void IsTooClose()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, re);
 
@@ -172,15 +172,16 @@ public class PlayerController : MonoBehaviour, IHealable
                     Vector3 direction = ((hitCollider.transform.position - this.transform.position).normalized) * (re + .4f);
                     hitCollider.transform.position = this.transform.position + direction;
                 }
-
             }
-
         }
-
     }
 
     public void Damage(int amount)
     {
+        if (isDead) return;
+
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.PlayerHit);
+
         health = Mathf.Max(health - amount, 0);
         healthBar.SetHealth(health);
         if (isDead || !health.Equals(0)) return;
@@ -333,7 +334,7 @@ public class PlayerController : MonoBehaviour, IHealable
         {
             lightSpellIsRecharging = true;
             lightSpellRechargeRemainingTime = lightSpellRechargeTime;
-
+            
             if (isLeftCast)
             {
                 animator.SetTrigger(LeftCast);
@@ -358,8 +359,10 @@ public class PlayerController : MonoBehaviour, IHealable
     {
         if (isDead) return;
 
+        
         if (nextIsHeavy)
         {
+            FindObjectOfType<AudioManager>().PlayOneShot(Clip.HeavyCast);
             var hProjectile = Instantiate(heavyProjectile, leftCastSpawn.position, leftCastSpawn.rotation);
             hProjectile.SetSpeed(heavyProjectileSpeed);
             nextIsHeavy = false;
@@ -367,6 +370,7 @@ public class PlayerController : MonoBehaviour, IHealable
             return;
         }
         
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.LightCast);
         var lProjectile = Instantiate(lightProjectile, leftCastSpawn.position, leftCastSpawn.rotation);
         lProjectile.SetSpeed(lightProjectileSpeed);
     }
@@ -377,6 +381,7 @@ public class PlayerController : MonoBehaviour, IHealable
         
         if (nextIsHeavy)
         {
+            FindObjectOfType<AudioManager>().PlayOneShot(Clip.HeavyCast);
             var hProjectile = Instantiate(heavyProjectile, rightCastSpawn.position, rightCastSpawn.rotation);
             hProjectile.SetSpeed(heavyProjectileSpeed);
             nextIsHeavy = false;
@@ -384,6 +389,7 @@ public class PlayerController : MonoBehaviour, IHealable
             return;
         }
         
+        FindObjectOfType<AudioManager>().PlayOneShot(Clip.LightCast);
         var projectile = Instantiate(lightProjectile, rightCastSpawn.position, rightCastSpawn.rotation);
         projectile.SetSpeed(lightProjectileSpeed);
     }
