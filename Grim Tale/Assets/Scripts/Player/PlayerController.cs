@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour, IHealable
     [SerializeField] private float heavyProjectileSpeed;
     [SerializeField] private float lightProjectileDamage;
     [SerializeField] private float heavyProjectileDamage;
+    [SerializeField] private Transform rightCastSpawn;
+    [SerializeField] private Transform leftCastSpawn;
     //If these are changed, change the text in the buy menu!
     [SerializeField] private float scaleAttackDMG;
     [SerializeField] private float scaleAttackSPD;
@@ -181,6 +183,7 @@ public class PlayerController : MonoBehaviour, IHealable
         
         isDead = true;
         animator.SetTrigger(Die);
+        Invoke(nameof(LoadMainScreen), 1.5f);
     }
 
     public void Loot(int amount)
@@ -248,6 +251,11 @@ public class PlayerController : MonoBehaviour, IHealable
             mana -= amount;
 
         manaBar.SetMana(mana);
+    }
+
+    private void LoadMainScreen()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 
     private void View()
