@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour, IHealable
     private static float lightProjectileDamageStatic;
     private static float heavyProjectileDamageStatic;
 
+    private float re = .3f;
 
     private void Awake()
     {
@@ -131,6 +132,7 @@ public class PlayerController : MonoBehaviour, IHealable
         //Debug.Log(health);
         //Debug.Log(mana);
 
+        isTooClose();
 
         if (isDead) return;
         
@@ -141,6 +143,27 @@ public class PlayerController : MonoBehaviour, IHealable
         {
             Rotate();
             Animate();
+        }
+
+    }
+
+    private void isTooClose()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, re);
+
+        foreach (var hitCollider in hitColliders)
+        {
+            //Add other enemy types.
+            if ((hitCollider.transform.tag == "skelly" || hitCollider.transform.tag == "warchief" || hitCollider.transform.tag == "shaman" || hitCollider.transform.tag == "charger") && hitCollider.transform != gameObject.transform)
+            {
+                if ((hitCollider.transform.position - this.transform.position).magnitude < re)
+                {
+                    Vector3 direction = ((hitCollider.transform.position - this.transform.position).normalized) * (re + .4f);
+                    hitCollider.transform.position = this.transform.position + direction;
+                }
+
+            }
+
         }
 
     }
