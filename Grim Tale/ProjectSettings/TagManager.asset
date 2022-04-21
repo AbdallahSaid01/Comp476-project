@@ -21,6 +21,7 @@ TagManager:
   - charger
   - warchief
   - shaman
+  - congrats
   layers:
   - Default
   - TransparentFX

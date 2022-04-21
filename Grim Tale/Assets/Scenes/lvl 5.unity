@@ -320,6 +320,14 @@ PrefabInstance:
       propertyPath: end
       value: 
       objectReference: {fileID: 787374692}
+    - target: {fileID: 6067783873151581284, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
+      propertyPath: m_text
+      value: Moving on to Level 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067783873151581290, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6067783873237030985, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
       propertyPath: m_Pivot.x
       value: 0

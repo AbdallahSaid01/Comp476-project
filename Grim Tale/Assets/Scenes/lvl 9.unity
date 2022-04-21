@@ -1406,58 +1406,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1087178372334489362, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-    - target: {fileID: 4249615159487356713, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1115.9282
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249615159487356713, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 166.6343
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249615159487356713, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249615159487356713, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_text
-      value: CONGRATULATIONS!!
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_fontSize
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 4981484007318414421, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5623359804236242025, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
       propertyPath: end
       value: 
       objectReference: {fileID: 782426912}
+    - target: {fileID: 6067783873151581284, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
+      propertyPath: m_text
+      value: Moving on to Level 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067783873151581290, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6067783873237030985, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1547,16 +1507,8 @@ PrefabInstance:
       value: levelTransition
       objectReference: {fileID: 0}
     - target: {fileID: 6067783873459604711, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_fontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6067783873459604711, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661331616745054127, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}
-      propertyPath: m_TagString
-      value: congrats
+      propertyPath: m_text
+      value: Level 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a15dbb474c44ba4dae0d258ca98af98, type: 3}

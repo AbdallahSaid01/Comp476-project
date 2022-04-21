@@ -10,8 +10,9 @@ public class levelTransition : MonoBehaviour
     GameObject enemies;
     GameObject player;
     public TMP_Text end;
+    public TMP_Text congrats;
     private bool check = true;
-    private const int maxIndex = 5;
+    private const int maxIndex = 10;
     private float transitionTime = 3.0f;
     private AsyncOperation sceneAsync;
 
@@ -36,7 +37,7 @@ public class levelTransition : MonoBehaviour
                 end.gameObject.SetActive(true);
             }
             else
-                Debug.Log("Congratulations! You beat the game!");
+                congrats.gameObject.SetActive(true);
 
         }
 
