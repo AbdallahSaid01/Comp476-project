@@ -6,6 +6,9 @@ namespace AI.Enemies
 {
     public class GoblinWarchief : Enemy
     {
+        [Header("Goblin Warchief")]
+        [SerializeField] private ParticleSystem healingEffect;
+        
         private Enemy target;
         
         public override void Attack()
@@ -38,7 +41,10 @@ namespace AI.Enemies
         // Animation event
         private void InstantiateProjectile()
         {
+            if (!target) return;
             
+            target.Heal(damage);
+            Instantiate(healingEffect.gameObject, target.transform.position, Quaternion.identity, target.gameObject.transform);
         }
     }
 }

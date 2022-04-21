@@ -834,6 +834,7 @@ MonoBehaviour:
   killParticleSystem: {fileID: 8654984750241522207, guid: 85960d1cb1d594f5d8192eb4ba44ff97, type: 3}
   damageParticleSystem: {fileID: 8654984750241522207, guid: 77b6ca6a4a9f24938b40d74b50124336, type: 3}
   healingValue: 10
+  healingEffect: {fileID: 7311631381300611066, guid: a8037da7e0841e647860a1446373b07c, type: 3}
 --- !u!136 &1067869423186393780
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -8,7 +8,8 @@ namespace AI.Allies
     {
         [Header("Healer")] 
         [SerializeField] [Min(0)] private int healingValue = 10;
-        
+        [SerializeField] private ParticleSystem healingEffect;
+
         private GameObject target;
         
         public override void Attack()
@@ -50,7 +51,10 @@ namespace AI.Allies
         // Animation event
         private void InstantiateProjectile()
         {
-            target.GetComponent<IHealable>().Heal(10);
+            if (!target) return;
+
+            target.GetComponent<IHealable>().Heal(healingValue);
+            Instantiate(healingEffect.gameObject, target.transform.position, Quaternion.identity, target.gameObject.transform);
         }
     }
 }

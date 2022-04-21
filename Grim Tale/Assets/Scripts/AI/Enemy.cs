@@ -13,6 +13,7 @@ namespace AI
         [SerializeField] protected int damage = 1;
         [SerializeField] private float damageCooldown = 1f;
         [SerializeField] protected float health = 50f;
+        [SerializeField] protected float maxHealth = 50f;
         [SerializeField] protected float damageByLightAttack = 10f;
         [SerializeField] protected float damageByHeavyAttack = 30f;
         [SerializeField] private bool hasAnimationAttack;
@@ -104,21 +105,10 @@ namespace AI
 
         }
 
-        // private void OnTriggerEnter(Collider other)
-        // {
-        //     var enemy = other.GetComponent<Enemy>();
-        //     if (!enemy) return;
-        //
-        //     agent.FormationVector += (transform.position - enemy.transform.position).normalized;
-        // }
-        //
-        // private void OnTriggerExit(Collider other)
-        // {
-        //     var enemy = other.GetComponent<Enemy>();
-        //     if (!enemy) return;
-        //
-        //     agent.FormationVector -= (transform.position - enemy.transform.position).normalized;
-        // }
+        public void Heal(int amount)
+        {
+            health = Mathf.Min(health + amount, maxHealth);
+        }
 
         public virtual void Attack()
         {
