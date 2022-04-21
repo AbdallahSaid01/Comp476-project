@@ -6,12 +6,14 @@ public class BuyMenu : MonoBehaviour
 {
     public static bool GamePaused = false;
     public GameObject buyMenuUI;
+    public GameObject ally;
     private PlayerController pc;
     //If these are changed, change the text in the buy Menu!
     [SerializeField] private int HpCost;
     [SerializeField] private int ManaCost;
     [SerializeField] private int AtkSPDCost;
     [SerializeField] private int AtkDMGCost;
+    [SerializeField] private int AllyCost;
     /////////////////////////////////////////////////////////
 
     private void Awake()
@@ -75,6 +77,15 @@ public class BuyMenu : MonoBehaviour
             pc.incrementLightAttackDMG();
             pc.incrementHeavyAttackDMG();
             pc.setGold(pc.getGold() - AtkDMGCost);
+        }
+    }
+
+    public void buyAlly()
+    {
+        if (pc.getGold() > AllyCost)
+        {
+            Instantiate(ally, new Vector3(10.0f, 0f, 12.5f), Quaternion.identity);
+            pc.setGold(pc.getGold() - AllyCost);
         }
     }
 
